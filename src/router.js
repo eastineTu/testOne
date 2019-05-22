@@ -7,6 +7,7 @@ const Login = r => require.ensure([], () => r(require('./views/Login.vue')), 'Lo
 const Question = r => require.ensure([], () => r(require('./views/Question.vue')), 'Question')
 const Rule = r => require.ensure([], () => r(require('./views/Rule.vue')), 'Rule')
 const Finish = r => require.ensure([], () => r(require('./views/Finish.vue')), 'Finish')
+const QuestionList = r => require.ensure([], () => r(require('./views/QuestionList.vue')), 'QuestionList')
 
 Vue.use(Router)
 
@@ -50,6 +51,12 @@ const route = new Router({
             name: 'finish',
             meta: { title: '完成' },
             component: Finish
+        },
+        {
+            path: '/questionList',
+            name: 'questionList',
+            meta: { title: '问题列表' },
+            component: QuestionList
         }
     ]
 })

@@ -324,6 +324,7 @@
                     Q10.push(item.selectAnswer)
                 })
                 query.set("Q10", Q10)
+                query.set("count", this.countNum)
                 query.save().then(res => {
                     this.$router.push({name: 'finish', params: {countNum: this.countNum}});
                     console.log(res)
