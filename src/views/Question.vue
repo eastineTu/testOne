@@ -36,10 +36,10 @@
             <div class="select-photo">
                 <!-- 上传图片 -->
                 <uploadImg ref="upload1" :imgSrc="takePhotoInfos[questionIndex - 7].imgSrc" :upType="'camera'"
-                           v-on:imageSrc="doSetImageList" v-on:progress="doProgress" ></uploadImg>
+                           v-on:imageSrc="doSetImageList" v-on:progress="doProgress"></uploadImg>
             </div>
             <div class="question-num"> {{questionIndex + 1}} /10</div>
-            <div class="submit-button" @click="doTakePhotoNext" onclick="event.cancelBubble = clickAble"> 下一题</div>
+            <div class="submit-button" @click="doTakePhotoNext"> 下一题</div>
         </div>
         <div class="answer-info" v-if="isAnswer">
             <div class="answer-message">
@@ -66,6 +66,7 @@
 
 <script>
     import uploadImg from '@/components/uploadImg'
+
     export default {
         name: "Login",
         components: {
@@ -76,8 +77,8 @@
                 clickAble: false,
                 longitude: 0,
                 latitude: 0,
-                user:'',
-                address:'',
+                userId: '',
+                address: '',
                 questionIndex: 0,
                 countNum: 0,
                 valueNum: 10,
@@ -87,20 +88,29 @@
                 img1: '',
                 img2: '',
                 img3: '',
-                takePhotoInfos: [{info:'(图片题）8：是否有独立的体验区（10分)', selectAnswer:'', imgSrc: require('../assets/take-photo.png')},
-                    {info:'(图片题）9：是否有美容仪器（10分)', selectAnswer:'', imgSrc: require('../assets/take-photo.png')},
-                    {info:'(图片题）10：店内是否有生物科技护肤品的陈列（10分)', selectAnswer:'', imgSrc: require('../assets/take-photo.png')}
-                ],
-                questions: [{
-                    questionInfo: '(单选题)1：适合敏感肌肤的清洁类产品可以包含以下哪项(2分)',
-                    selectA: '皂基',
-                    selectB: '酒精香精',
-                    selectC: '人工防腐剂',
-                    selectD: '氨基酸',
-                    answer: 'D',
+                takePhotoInfos: [{
+                    info: '(图片题）8：是否有独立的体验区（10分)',
                     selectAnswer: '',
-                    info: '氨基酸类洁面温和不刺激，适合敏感肌肤使用 。'
+                    imgSrc: require('../assets/take-photo.png')
                 },
+                    {info: '(图片题）9：是否有美容仪器（10分)', selectAnswer: '', imgSrc: require('../assets/take-photo.png')},
+                    {
+                        info: '(图片题）10：店内是否有生物科技护肤品的陈列（10分)',
+                        selectAnswer: '',
+                        imgSrc: require('../assets/take-photo.png')
+                    }
+                ],
+                questions: [
+                    {
+                        questionInfo: '(单选题)1：适合敏感肌肤的清洁类产品可以包含以下哪项(2分)',
+                        selectA: '皂基',
+                        selectB: '酒精香精',
+                        selectC: '人工防腐剂',
+                        selectD: '氨基酸',
+                        answer: 'D',
+                        selectAnswer: '',
+                        info: '氨基酸类洁面温和不刺激，适合敏感肌肤使用 。'
+                    },
                     {
                         questionInfo: '(单选题)2：以下哪项不属于皮肤的三大层(4分)',
                         selectA: '角质层',
@@ -293,26 +303,29 @@
                 this.$bmob.initialize('5341f8e254942033b3dae717daa7eed5', '4e0664824ca488cccad8fe1508a2baa0');
                 const query = this.$bmob.Query('question');
                 if (this.img1) {
-                    query.set("image1",this.img1)
+                    query.set("image1", this.img1)
                 }
                 if (this.img2) {
-                    query.set("image2",this.img2)
+                    query.set("image2", this.img2)
                 }
                 if (this.img3) {
-                    query.set("image3",this.img3)
+                    query.set("image3", this.img3)
                 }
                 let pointer = this.$bmob.Pointer('_User')
-                const isPublisher = pointer.set(this.user.objectId)
+                const isPublisher = pointer.set(this.userId)
                 query.set("user", isPublisher)
-                const point = this.$bmob.GeoPoint({ latitude: this.latitude,longitude: this.longitude })
+                const point = this.$bmob.GeoPoint({latitude: this.latitude, longitude: this.longitude})
                 query.set("location", point)
                 let Q10 = []
                 this.questions.forEach((item) => {
                     Q10.push(item.selectAnswer)
                 })
+                this.takePhotoInfos.forEach((item) => {
+                    Q10.push(item.selectAnswer)
+                })
                 query.set("Q10", Q10)
                 query.save().then(res => {
-                    this.$router.push({name:'finish', params:{countNum: this.countNum}});
+                    this.$router.push({name: 'finish', params: {countNum: this.countNum}});
                     console.log(res)
                 }).catch(err => {
                     console.log(err)
@@ -320,9 +333,9 @@
             }
         },
         created() {
-            this.user = this.$route.params.code
-            this.longitude = this.$route.params.longitude
-            this.latitude = this.$route.params.latitude
+            this.userId = localStorage.getItem("userId")
+            this.longitude = parseFloat(localStorage.getItem("longitude"))
+            this.latitude = parseFloat(localStorage.getItem("latitude"))
         }
     }
 </script>

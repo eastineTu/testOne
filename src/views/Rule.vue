@@ -23,13 +23,10 @@
         },
         methods: {
             goQuestion() {
-                this.$router.push({name: 'question', params:{code: this.user, longitude: this.longitude, latitude: this.latitude}});
+                this.$router.push({name: 'question'});
             }
         },
         created() {
-            this.user = this.$route.params.code
-            this.longitude = this.$route.params.longitude
-            this.latitude = this.$route.params.latitude
         }
     }
 </script>

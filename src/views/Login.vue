@@ -87,7 +87,11 @@
 
             },
             loginSuccess() {
-                this.$router.push({name: 'rule', params:{code: this.user, longitude: this.longitude, latitude: this.latitude}});
+                localStorage.setItem("userId", this.user.objectId)
+                localStorage.setItem("longitude", this.longitude)
+                localStorage.setItem("latitude", this.latitude)
+                console.log('qqq>>>>>'+this.longitude)
+                this.$router.push({name: 'rule'});
             }
         },
         created() {
