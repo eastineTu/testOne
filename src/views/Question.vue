@@ -66,7 +66,7 @@
 
 <script>
     import uploadImg from '@/components/uploadImg'
-
+    import { pushHistory } from '../utils/unit.js'
     export default {
         name: "Login",
         components: {
@@ -326,11 +326,18 @@
                 query.set("Q10", Q10)
                 query.set("count", this.countNum)
                 query.save().then(res => {
-                    this.$router.push({name: 'finish', params: {countNum: this.countNum}});
+                    this.$router.replace({name: 'finish', params: {countNum: this.countNum}});
                     console.log(res)
                 }).catch(err => {
                     console.log(err)
                 })
+            }
+        },
+        mounted () {
+            pushHistory()
+            // 监听历史记录点, 添加返回事件监听
+            window.onpopstate = () => {
+                this.showToast('不能后退喔!')
             }
         },
         created() {

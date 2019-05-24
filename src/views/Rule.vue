@@ -23,7 +23,8 @@
         },
         methods: {
             goQuestion() {
-                this.$router.push({name: 'question'});
+                // this.$router.push({name: 'question'});
+                this.$router.replace({name: 'question'});
             }
         },
         created() {

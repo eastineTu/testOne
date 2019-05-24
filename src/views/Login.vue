@@ -39,6 +39,21 @@
             }
         },
         methods: {
+            showToast(msg, duration) {
+                duration = isNaN(duration) ? 3000 : duration;
+                var m = document.createElement('div');
+                m.innerHTML = msg;
+                m.style.cssText = "width:60%; min-width:180px; background:#000; opacity:0.6; height:auto;min-height: 30px; color:#fff; line-height:30px; text-align:center; border-radius:4px; position:fixed; top:60%; left:20%; z-index:999999;";
+                document.body.appendChild(m);
+                setTimeout(function () {
+                    var d = 0.5;
+                    m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                    m.style.opacity = '0';
+                    setTimeout(function () {
+                        document.body.removeChild(m)
+                    }, d * 1000);
+                }, duration);
+            },
             getLocation() {
                 let _thit = this
                 var map = new BMap.Map("allmap");
@@ -57,6 +72,7 @@
                         // this.address = result.formattedAddress
                         // alert('您的位置：' + JSON.stringify(r.address) + r.point.lng+','+r.point.lat);
                     } else {
+                        WeixinJSBridge.call('closeWindow');
                         // alert('failed'+this.getStatus());
                     }
                 },{enableHighAccuracy: true})
@@ -72,29 +88,53 @@
             doLogin() {
                 this.$bmob.initialize('5341f8e254942033b3dae717daa7eed5', '4e0664824ca488cccad8fe1508a2baa0');
                 if (!this.isLoginError) {
-                    this.$bmob.User.login(this.code,this.phone).then(res => {
-                        this.user = res
-                        this.loginSuccess()
-                        console.log(res)
+                    this.$bmob.User.login(this.code, this.phone).then(res => {
+                        this.checkHasQuestions(res.objectId)
                     }).catch(err => {
                         this.loginError()
                         console.log(err)
                     });
-
                 } else {
                     this.loginBack()
                 }
 
+            },
+            checkHasQuestions(objectId) {
+                const pointer =  this.$bmob.Pointer('_User');
+                const poiID = pointer.set(objectId);
+                const query = this.$bmob.Query("question");
+                query.equalTo("user", "==", poiID);
+                query.count().then(res => {
+                    if(res === 0) {
+                        this.user = res
+                        this.loginSuccess()
+                    } else {
+                        this.showToast('你已经答过题了！')
+                    }
+                });
             },
             loginSuccess() {
                 localStorage.setItem("userId", this.user.objectId)
                 localStorage.setItem("longitude", this.longitude)
                 localStorage.setItem("latitude", this.latitude)
                 console.log('qqq>>>>>'+this.longitude)
-                this.$router.push({name: 'rule'});
+                // this.$router.push({name: 'rule'});
+                this.$router.replace({name: 'rule'});
+            },
+            checkWx() {
+                var useragent = navigator.userAgent;
+                if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+                    // 这里警告框会阻塞当前页面继续加载
+                    alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
+                    // 以下代码是用javascript强行关闭当前页面
+                    var opened = window.open('about:blank', '_self');
+                    opened.opener = null;
+                    opened.close();
+                }
             }
         },
         created() {
+            this.checkWx()
             this.getLocation()
         }
     }
