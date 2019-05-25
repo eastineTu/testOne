@@ -68,10 +68,18 @@
                         map.panTo(r.point);
                         _thit.longitude = r.point.lng
                         _thit.latitude = r.point.lat
+                        if(r.accuracy==null){
+                            _thit.showToast('您没有开启权限！')
+                            WeixinJSBridge.call('closeWindow');
+                            //用户决绝地理位置授权
+                        }
                         // debugger
                         // this.address = result.formattedAddress
                         // alert('您的位置：' + JSON.stringify(r.address) + r.point.lng+','+r.point.lat);
                     } else {
+                        var opened = window.open('about:blank', '_self');
+                        opened.opener = null;
+                        opened.close();
                         WeixinJSBridge.call('closeWindow');
                         // alert('failed'+this.getStatus());
                     }
