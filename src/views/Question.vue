@@ -1,65 +1,68 @@
 <template>
     <div class="all-question">
-        <div class="question-info" v-if="isQuestion">
-            <img class="question-people" src="../assets/question_people.png"/>
-            <div class="title-name"> 神雕侠侣</div>
-            <progress :value='valueNum' max="100"></progress>
-            <div class="progress-value">{{valueNum}}%</div>
-            <div class="question-message">{{questions[questionIndex].questionInfo}}</div>
-            <div class="select-input" v-if="questionIndex < 4">
-                <label><input name="Fruit" type="radio" value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
-                <label><input name="Fruit" type="radio" value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
-                <label><input name="Fruit" type="radio" value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
-                <label><input name="Fruit" type="radio" value="D"/>D:{{questions[questionIndex].selectD}}</label>
+        <div class="mogol"/>
+        <div class="all-question-info">
+            <div class="question-info" v-if="isQuestion">
+                <img class="question-people" src="../assets/question_people.png"/>
+                <div class="title-name"> 神雕侠侣</div>
+                <progress :value='valueNum' max="100"></progress>
+                <div class="progress-value">{{valueNum}}%</div>
+                <div class="question-message" v-html="questions[questionIndex].questionInfo" ></div>
+                <div class="select-input" v-if="questionIndex < 4">
+                    <label><input name="Fruit" type="radio" value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
+                    <label><input name="Fruit" type="radio" value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
+                    <label><input name="Fruit" type="radio" value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
+                    <label><input name="Fruit" type="radio" value="D"/>D:{{questions[questionIndex].selectD}}</label>
+                </div>
+                <div class="select-input" v-if="questionIndex >= 4">
+                    <label><input name="more" type="checkbox" value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
+                    <label><input name="more" type="checkbox" value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
+                    <label><input name="more" type="checkbox" value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
+                    <label><input name="more" type="checkbox" value="D"/>D:{{questions[questionIndex].selectD}}</label><br>
+                    <label v-if="questions[questionIndex].selectE">
+                        <input name="more" type="checkbox" value="E"/>E:{{questions[questionIndex].selectE}}</label>
+                </div>
+                <div class="question-num"> {{questionIndex + 1}} /10</div>
+                <div class="submit-button" @click="doCheck()"> 提交</div>
             </div>
-            <div class="select-input" v-if="questionIndex >= 4">
-                <label><input name="more" type="checkbox" value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
-                <label><input name="more" type="checkbox" value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
-                <label><input name="more" type="checkbox" value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
-                <label><input name="more" type="checkbox" value="D"/>D:{{questions[questionIndex].selectD}}</label><br>
-                <label v-if="questions[questionIndex].selectE">
-                    <input name="more" type="checkbox" value="E"/>E:{{questions[questionIndex].selectE}}</label>
+            <div class="question-info" v-if="isTakePhoto">
+                <img class="question-people" src="../assets/question_people.png"/>
+                <div class="title-name"> 神雕侠侣</div>
+                <progress :value='valueNum' max="100"></progress>
+                <div class="progress-value">{{valueNum}}%</div>
+                <div class="question-message">{{takePhotoInfos[questionIndex - 7].info}}</div>
+                <div class="select-input">
+                    <label><input name="Fruit" type="radio" value="" checked/> A：是→上传照片 </label><br>
+                    <label><input name="Fruit" type="radio" value=""/> B：否 </label>
+                </div>
+                <div class="select-photo">
+                    <!-- 上传图片 -->
+                    <uploadImg ref="upload1" :imgSrc="takePhotoInfos[questionIndex - 7].imgSrc" :upType="'camera'"
+                               v-on:imageSrc="doSetImageList" v-on:progress="doProgress"></uploadImg>
+                </div>
+                <div class="question-num"> {{questionIndex + 1}} /10</div>
+                <div class="submit-button" @click="doTakePhotoNext"> 下一题</div>
             </div>
-            <div class="question-num"> {{questionIndex + 1}} /10</div>
-            <div class="submit-button" @click="doCheck()"> 提交</div>
-        </div>
-        <div class="question-info" v-if="isTakePhoto">
-            <img class="question-people" src="../assets/question_people.png"/>
-            <div class="title-name"> 神雕侠侣</div>
-            <progress :value='valueNum' max="100"></progress>
-            <div class="progress-value">{{valueNum}}%</div>
-            <div class="question-message">{{takePhotoInfos[questionIndex - 7].info}}</div>
-            <div class="select-input">
-                <label><input name="Fruit" type="radio" value="" checked/> A：是→上传照片 </label><br>
-                <label><input name="Fruit" type="radio" value=""/> B：否 </label>
+            <div class="answer-info" v-if="isAnswer">
+                <div class="answer-message">
+                    {{questions[questionIndex].questionInfo.substr(5, questions[questionIndex].questionInfo.length - 1)}}
+                </div>
+                <div class="answer-message">
+                    A：{{questions[questionIndex].selectA}} B：{{questions[questionIndex].selectB}}
+                </div>
+                <div class="answer-message">
+                    C：{{questions[questionIndex].selectC}} D：{{questions[questionIndex].selectD}}
+                </div>
+                <div class="answer-info-value">
+                    <div class="title">答案：</div>
+                    <div class="answer-info-info">{{questions[questionIndex].answer}}</div>
+                </div>
+                <div class="answer-info-value">
+                    <div class="title">解析：</div>
+                    <div class="answer-info-info">{{questions[questionIndex].info}}</div>
+                </div>
+                <div class="submit-button" @click="doNext"> 下一题</div>
             </div>
-            <div class="select-photo">
-                <!-- 上传图片 -->
-                <uploadImg ref="upload1" :imgSrc="takePhotoInfos[questionIndex - 7].imgSrc" :upType="'camera'"
-                           v-on:imageSrc="doSetImageList" v-on:progress="doProgress"></uploadImg>
-            </div>
-            <div class="question-num"> {{questionIndex + 1}} /10</div>
-            <div class="submit-button" @click="doTakePhotoNext"> 下一题</div>
-        </div>
-        <div class="answer-info" v-if="isAnswer">
-            <div class="answer-message">
-                {{questions[questionIndex].questionInfo.substr(5, questions[questionIndex].questionInfo.length - 1)}}
-            </div>
-            <div class="answer-message">
-                A：{{questions[questionIndex].selectA}} B：{{questions[questionIndex].selectB}}
-            </div>
-            <div class="answer-message">
-                C：{{questions[questionIndex].selectC}} D：{{questions[questionIndex].selectD}}
-            </div>
-            <div class="answer-info-value">
-                <div class="title">答案：</div>
-                <div class="answer-info-info">{{questions[questionIndex].answer}}</div>
-            </div>
-            <div class="answer-info-value">
-                <div class="title">解析：</div>
-                <div class="answer-info-info">{{questions[questionIndex].info}}</div>
-            </div>
-            <div class="submit-button" @click="doNext"> 下一题</div>
         </div>
     </div>
 </template>
@@ -102,8 +105,7 @@
                 ],
                 questions: [
                     {
-                        questionInfo: '(单选题)\n' +
-                            '适合敏感肌肤的清洁类产品可以包含以下哪项(2分)',
+                        questionInfo: '(单选题)'+  '<br/>' +'适合敏感肌肤的清洁类产品可以包含以下哪项(2分)',
                         selectA: '皂基',
                         selectB: '酒精香精',
                         selectC: '人工防腐剂',
@@ -214,7 +216,6 @@
                         this.countNum += this.questions[this.questionIndex].selectAnswer.length * 5
                     }
                 }
-                console.log('得分：' + this.countNum)
             },
             getRadioValue() {
                 if (this.questionIndex < 4) {
@@ -353,87 +354,103 @@
     .all-question
         width 100%
         height 100%
-        padding 0 48px
         background-image url(../assets/common_bg.jpg)
         background-repeat no-repeat
         background-size 100% 100%
-        display flex
-        .question-info
-            background white
-            margin: auto
-            border 3PX solid #4875a2
-            min-height 700px
-            padding-bottom 45px
+        position relative
+        .mogol
             width 100%
-            .question-people
-                width 150px
-                height 150px
-                margin-top 30px
-            .title-name
-                font-size 32px
-            progress
-                border 2px solid #F2F2F2
-                width 350px
-                height 8px
-                color #f00;
-                background #F2F2F2
-                border-radius: 20px
-            .progress-value
-                color #4A729F
-                font-size 18px
-            .question-num
-                font-size 24px
-                margin 25px 0
-            .question-message
-                font-size 30px
-                text-align left
-                margin-left 30px
-            .select-input
-                text-align left
-                margin-top 30px
-                margin-left 150px
-                label
-                    display flex
-                    input
-                        margin-top 2px
-                        margin-right 10px
-            .select-photo
-                margin-top 30px
+            height 100%
+            background rgba(241, 225, 242, 0.5)
+            z-index 10
+            position absolute
+            top 0
+            left 0
+        .all-question-info
+            width 100%
+            height 100%
+            padding 0 48px
+            position absolute
+            top 0
+            left 0
+            display flex
+            z-index 999
+            .question-info
+                background white
+                margin: auto
+                border 3PX solid #4875a2
+                min-height 700px
+                padding-bottom 45px
                 width 100%
-                height 200px
-        .submit-button
-            width 175px
-            height 65px
-            text-align center
-            line-height 65px
-            color white
-            margin 0 auto
-            font-size 30px
-            margin-bottom 30px
-            background-image url(../assets/button.png)
-            background-repeat no-repeat
-            background-size 100% 100%
-        .answer-info
-            padding-top 30px
-            background white
-            margin: auto
-            border 3PX solid #4875a2
-            min-height 500px
-            width 100%
-            .answer-message
-                font-size 28px
-                text-align left
-                margin-left 30px
-            .answer-info-value
-                text-align left
-                display flex
-                margin-left 30px
-                margin-top 60px
-                margin-bottom 30px
-                .title
+                .question-people
+                    width 150px
+                    height 150px
+                    margin-top 30px
+                .title-name
+                    font-size 32px
+                progress
+                    border 2px solid #F2F2F2
+                    width 350px
+                    height 8px
+                    color #f00;
+                    background #F2F2F2
+                    border-radius: 20px
+                .progress-value
+                    color #4A729F
+                    font-size 18px
+                .question-num
+                    font-size 24px
+                    margin 25px 0
+                .question-message
                     font-size 30px
-                    width 100px
-                .answer-info-info
-                    flex 1
-                    margin-top 10px
+                    text-align left
+                    margin-left 30px
+                .select-input
+                    text-align left
+                    margin-top 30px
+                    margin-left 150px
+                    label
+                        display flex
+                        input
+                            margin-top 2px
+                            margin-right 10px
+                .select-photo
+                    margin-top 30px
+                    width 100%
+                    height 200px
+            .submit-button
+                width 175px
+                height 65px
+                text-align center
+                line-height 65px
+                color white
+                margin 0 auto
+                font-size 30px
+                margin-bottom 30px
+                background-image url(../assets/button.png)
+                background-repeat no-repeat
+                background-size 100% 100%
+            .answer-info
+                padding-top 30px
+                background white
+                margin: auto
+                border 3PX solid #4875a2
+                min-height 500px
+                width 100%
+                .answer-message
+                    font-size 28px
+                    text-align left
+                    margin-left 30px
+                .answer-info-value
+                    text-align left
+                    display flex
+                    margin-left 30px
+                    margin-top 60px
+                    margin-bottom 30px
+                    .title
+                        font-size 30px
+                        width 100px
+                    .answer-info-info
+                        flex 1
+                        margin-top 10px
 </style>
