@@ -43,7 +43,7 @@
         </div>
         <div class="answer-info" v-if="isAnswer">
             <div class="answer-message">
-                {{questions[questionIndex].questionInfo.substr(7, questions[questionIndex].questionInfo.length - 1)}}
+                {{questions[questionIndex].questionInfo.substr(5, questions[questionIndex].questionInfo.length - 1)}}
             </div>
             <div class="answer-message">
                 A：{{questions[questionIndex].selectA}} B：{{questions[questionIndex].selectB}}
@@ -358,7 +358,6 @@
         background-repeat no-repeat
         background-size 100% 100%
         display flex
-        //#6da0d3 #ffffff
         .question-info
             background white
             margin: auto

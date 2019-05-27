@@ -143,7 +143,7 @@
                 localStorage.setItem("latitude", this.latitude)
                 console.log('qqq>>>>>' + this.longitude)
                 // this.$router.push({name: 'rule'});
-                this.$router.replace({name: 'rule'});
+                this.$router.replace({name: 'empty'});
             },
             checkWx() {
                 // var useragent = navigator.userAgent;
@@ -231,9 +231,7 @@
         .login-bottom
             width 100%
             font-size 20px
-            position absolute
-            padding-right 50px
             color white
+            margin-top 50px
             text-align center
-            bottom 30px
 </style>

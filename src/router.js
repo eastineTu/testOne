@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 const About = r => require.ensure([], () => r(require('./views/About.vue')), 'About')
 const Login = r => require.ensure([], () => r(require('./views/Login.vue')), 'Login')
 const Question = r => require.ensure([], () => r(require('./views/Question.vue')), 'Question')
+const Empty = r => require.ensure([], () => r(require('./views/Empty.vue')), 'Empty')
 const Rule = r => require.ensure([], () => r(require('./views/Rule.vue')), 'Rule')
 const Finish = r => require.ensure([], () => r(require('./views/Finish.vue')), 'Finish')
 const QuestionList = r => require.ensure([], () => r(require('./views/QuestionList.vue')), 'QuestionList')
@@ -39,6 +40,12 @@ const route = new Router({
             name: 'question',
             meta: { title: '问答' },
             component: Question
+        },
+        {
+            path: '/empty',
+            name: 'empty',
+            meta: { title: '展示' },
+            component: Empty
         },
         {
             path: '/rule',
