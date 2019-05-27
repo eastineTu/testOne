@@ -21,6 +21,9 @@
         </div>
 
         <img class="login-submit" :src=src @click="doLogin"/>
+
+        <div class="login-bottom">请务必在您的门店内答题，我将全程对您实时定位</div>
+
     </div>
 </template>
 
@@ -57,22 +60,26 @@
             getLocation() {
                 let _thit = this
                 var map = new BMap.Map("allmap");
-                var point = new BMap.Point(116.331398,39.897445);
-                map.centerAndZoom(point,12);
+                var point = new BMap.Point(116.331398, 39.897445);
+                map.centerAndZoom(point, 12);
 
                 var geolocation = new BMap.Geolocation();
-                geolocation.getCurrentPosition(function(r){
-                    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                geolocation.getCurrentPosition(function (r) {
+                    if (this.getStatus() == BMAP_STATUS_SUCCESS) {
                         var mk = new BMap.Marker(r.point);
                         map.addOverlay(mk);
                         map.panTo(r.point);
                         _thit.longitude = r.point.lng
                         _thit.latitude = r.point.lat
-                        if(r.accuracy==null){
-                            _thit.showToast('您没有开启权限！')
-                            WeixinJSBridge.call('closeWindow');
-                            //用户决绝地理位置授权
-                        }
+                        // if (r.accuracy == null) {
+                        //     WeixinJSBridge.call('closeWindow');
+                        //     _thit.showToast('您没有开启权限！')
+                        //     var opened = window.open('about:blank', '_self');
+                        //     opened.opener = null;
+                        //     opened.close();
+                        //     return;
+                        //     //用户决绝地理位置授权
+                        // }
                         // debugger
                         // this.address = result.formattedAddress
                         // alert('您的位置：' + JSON.stringify(r.address) + r.point.lng+','+r.point.lat);
@@ -83,7 +90,7 @@
                         WeixinJSBridge.call('closeWindow');
                         // alert('failed'+this.getStatus());
                     }
-                },{enableHighAccuracy: true})
+                }, {enableHighAccuracy: true})
             },
             loginBack() {
                 this.src = require('../assets/login-submit.png')
@@ -95,25 +102,34 @@
             },
             doLogin() {
                 this.$bmob.initialize('5341f8e254942033b3dae717daa7eed5', '4e0664824ca488cccad8fe1508a2baa0');
-                if (!this.isLoginError) {
-                    this.$bmob.User.login(this.code, this.phone).then(res => {
-                        this.checkHasQuestions(res.objectId)
-                    }).catch(err => {
-                        this.loginError()
-                        console.log(err)
-                    });
+                if (this.longitude) {
+                    if (!this.isLoginError) {
+                        this.$bmob.User.login(this.code, this.phone).then(res => {
+                            this.checkHasQuestions(res.objectId)
+                        }).catch(err => {
+                            this.loginError()
+                            console.log(err)
+                        });
+                    } else {
+                        this.loginBack()
+                    }
                 } else {
-                    this.loginBack()
+                    WeixinJSBridge.call('closeWindow');
+                    this.showToast('您没有开启权限！')
+                    var opened = window.open('about:blank', '_self');
+                    opened.opener = null;
+                    opened.close();
                 }
+
 
             },
             checkHasQuestions(objectId) {
-                const pointer =  this.$bmob.Pointer('_User');
+                const pointer = this.$bmob.Pointer('_User');
                 const poiID = pointer.set(objectId);
                 const query = this.$bmob.Query("question");
                 query.equalTo("user", "==", poiID);
                 query.count().then(res => {
-                    if(res === 0) {
+                    if (res === 0) {
                         this.user = res
                         this.loginSuccess()
                     } else {
@@ -125,20 +141,20 @@
                 localStorage.setItem("userId", this.user.objectId)
                 localStorage.setItem("longitude", this.longitude)
                 localStorage.setItem("latitude", this.latitude)
-                console.log('qqq>>>>>'+this.longitude)
+                console.log('qqq>>>>>' + this.longitude)
                 // this.$router.push({name: 'rule'});
                 this.$router.replace({name: 'rule'});
             },
             checkWx() {
-                var useragent = navigator.userAgent;
-                if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
-                    // 这里警告框会阻塞当前页面继续加载
-                    alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
-                    // 以下代码是用javascript强行关闭当前页面
-                    var opened = window.open('about:blank', '_self');
-                    opened.opener = null;
-                    opened.close();
-                }
+                // var useragent = navigator.userAgent;
+                // if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+                //     // 这里警告框会阻塞当前页面继续加载
+                //     alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
+                //     // 以下代码是用javascript强行关闭当前页面
+                //     var opened = window.open('about:blank', '_self');
+                //     opened.opener = null;
+                //     opened.close();
+                // }
             }
         },
         created() {
@@ -153,7 +169,7 @@
         width 100%
         height 100%
         padding 0 48px
-        background: linear-gradient(to bottom, #ffffff, #e6ddf1, #e6ddf1,#e6ddf1, #3b6e9e);
+        background: linear-gradient(to bottom, #ffffff, #e6ddf1, #e6ddf1, #e6ddf1, #3b6e9e);
         .login-submit
             width 135px
             height 135px
@@ -212,4 +228,12 @@
             .error-info
                 margin-left 80px
                 font-size 40px
+        .login-bottom
+            width 100%
+            font-size 20px
+            position absolute
+            padding-right 50px
+            color white
+            text-align center
+            bottom 30px
 </style>
