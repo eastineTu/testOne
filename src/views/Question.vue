@@ -355,6 +355,7 @@
             this.userId = localStorage.getItem("userId")
             this.longitude = parseFloat(localStorage.getItem("longitude"))
             this.latitude = parseFloat(localStorage.getItem("latitude"))
+            console.log('qqq>>>>>' + this.userId)
         }
     }
 </script>

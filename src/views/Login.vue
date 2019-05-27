@@ -105,6 +105,8 @@
                 if (this.longitude) {
                     if (!this.isLoginError) {
                         this.$bmob.User.login(this.code, this.phone).then(res => {
+                            this.user = res
+                            console.log('user>>>>>' + this.user)
                             this.checkHasQuestions(res.objectId)
                         }).catch(err => {
                             this.loginError()
@@ -130,7 +132,6 @@
                 query.equalTo("user", "==", poiID);
                 query.count().then(res => {
                     if (res === 0) {
-                        this.user = res
                         this.loginSuccess()
                     } else {
                         this.showToast('你已经答过题了！')
@@ -141,20 +142,20 @@
                 localStorage.setItem("userId", this.user.objectId)
                 localStorage.setItem("longitude", this.longitude)
                 localStorage.setItem("latitude", this.latitude)
-                console.log('qqq>>>>>' + this.longitude)
+                console.log('qqq>>>>>' + this.user.objectId)
                 // this.$router.push({name: 'rule'});
                 this.$router.replace({name: 'empty'});
             },
             checkWx() {
-                var useragent = navigator.userAgent;
-                if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
-                    // 这里警告框会阻塞当前页面继续加载
-                    alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
-                    // 以下代码是用javascript强行关闭当前页面
-                    var opened = window.open('about:blank', '_self');
-                    opened.opener = null;
-                    opened.close();
-                }
+                // var useragent = navigator.userAgent;
+                // if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+                //     // 这里警告框会阻塞当前页面继续加载
+                //     alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
+                //     // 以下代码是用javascript强行关闭当前页面
+                //     var opened = window.open('about:blank', '_self');
+                //     opened.opener = null;
+                //     opened.close();
+                // }
             }
         },
         created() {
@@ -170,9 +171,12 @@
         height 100%
         padding 0 48px
         background: linear-gradient(to bottom, #ffffff, #e6ddf1, #e6ddf1, #e6ddf1, #3b6e9e);
+        display flex
+        flex-direction column
         .login-submit
             width 135px
             height 135px
+            margin auto
             margin-top -65px
             text-align center
         .login-bg
@@ -232,6 +236,6 @@
             width 100%
             font-size 20px
             color white
-            margin-top 50px
+            padding-bottom 40px
             text-align center
 </style>
