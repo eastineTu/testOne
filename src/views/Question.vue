@@ -7,18 +7,25 @@
                 <div class="title-name"> 神雕侠侣</div>
                 <progress :value='valueNum' max="100"></progress>
                 <div class="progress-value">{{valueNum}}%</div>
-                <div class="question-message" v-html="questions[questionIndex].questionInfo" ></div>
+                <div class="question-message" v-html="questions[questionIndex].questionInfo"></div>
                 <div class="select-input" v-if="questionIndex < 4">
-                    <label><input name="Fruit" type="radio" value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
-                    <label><input name="Fruit" type="radio" value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
-                    <label><input name="Fruit" type="radio" value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
+                    <label><input name="Fruit" type="radio"
+                                  value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
+                    <label><input name="Fruit" type="radio"
+                                  value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
+                    <label><input name="Fruit" type="radio"
+                                  value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
                     <label><input name="Fruit" type="radio" value="D"/>D:{{questions[questionIndex].selectD}}</label>
                 </div>
                 <div class="select-input" v-if="questionIndex >= 4">
-                    <label><input name="more" type="checkbox" value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
-                    <label><input name="more" type="checkbox" value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
-                    <label><input name="more" type="checkbox" value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
-                    <label><input name="more" type="checkbox" value="D"/>D:{{questions[questionIndex].selectD}}</label><br>
+                    <label><input name="more" type="checkbox"
+                                  value="A"/>A:{{questions[questionIndex].selectA}}</label><br>
+                    <label><input name="more" type="checkbox"
+                                  value="B"/>B:{{questions[questionIndex].selectB}}</label><br>
+                    <label><input name="more" type="checkbox"
+                                  value="C"/>C:{{questions[questionIndex].selectC}}</label><br>
+                    <label><input name="more" type="checkbox"
+                                  value="D"/>D:{{questions[questionIndex].selectD}}</label><br>
                     <label v-if="questions[questionIndex].selectE">
                         <input name="more" type="checkbox" value="E"/>E:{{questions[questionIndex].selectE}}</label>
                 </div>
@@ -45,7 +52,8 @@
             </div>
             <div class="answer-info" v-if="isAnswer">
                 <div class="answer-message">
-                    {{questions[questionIndex].questionInfo.substr(5, questions[questionIndex].questionInfo.length - 1)}}
+                    {{questions[questionIndex].questionInfo.substr(5, questions[questionIndex].questionInfo.length -
+                    1)}}
                 </div>
                 <div class="answer-message">
                     A：{{questions[questionIndex].selectA}} B：{{questions[questionIndex].selectB}}
@@ -69,7 +77,8 @@
 
 <script>
     import uploadImg from '@/components/uploadImg'
-    import { pushHistory } from '../utils/unit.js'
+    import {pushHistory} from '../utils/unit.js'
+
     export default {
         name: "Login",
         components: {
@@ -105,7 +114,7 @@
                 ],
                 questions: [
                     {
-                        questionInfo: '(单选题)'+  '<br/>' +'适合敏感肌肤的清洁类产品可以包含以下哪项(2分)',
+                        questionInfo: '(单选题)' + '<br/>' + '适合敏感肌肤的清洁类产品可以包含以下哪项(2分)',
                         selectA: '皂基',
                         selectB: '酒精香精',
                         selectC: '人工防腐剂',
@@ -146,7 +155,7 @@
                         info: '混合肌属于肌肤类型，不属于肌肤问题。'
                     },
                     {
-                        questionInfo: '(多选题)特干肌应选择含有____成分的护肤品(15分，选对一项得3分，错选整题不得分)',
+                        questionInfo: '(多选题)'+ '<br/>' +'特干肌应选择含有____成分的护肤品(15分，选对一项得3分，错选整题不得分)',
                         selectA: '透明质酸',
                         selectB: '烟酰胺',
                         selectC: '水杨酸',
@@ -157,7 +166,7 @@
                             '主要用于消炎祛痘，不适合特干肌人群使用。'
                     },
                     {
-                        questionInfo: '(多选题)生物科技护肤品建立顾客档案要包含哪些内容(15分，选对一项得3分，错选整题不得分)',
+                        questionInfo: '(多选题)' + '<br/>' + '生物科技护肤品建立顾客档案要包含哪些内容(15分，选对一项得3分，错选整题不得分)',
                         selectA: '顾客信息',
                         selectB: '肌肤检测结果',
                         selectC: '问询结果',
@@ -168,7 +177,7 @@
                         info: '顾客档案不仅要包含联系信息，还要包含标准接待流程中产生的其他信息，如肌肤检测结果、问询结果、肌肤问题、所购产品等。'
                     },
                     {
-                        questionInfo: '(多选题)以下哪些可以是生物科技护肤品采用的水源(20分，选对一项得5分，错选整题不得分)',
+                        questionInfo: '(多选题)' + '<br/>' + '以下哪些可以是生物科技护肤品采用的水源(20分，选对一项得5分，错选整题不得分)',
                         selectA: '温泉水',
                         selectB: '矿泉水',
                         selectC: '高纯水',
@@ -335,7 +344,7 @@
                 })
             }
         },
-        mounted () {
+        mounted() {
             pushHistory()
             // 监听历史记录点, 添加返回事件监听
             window.onpopstate = () => {
