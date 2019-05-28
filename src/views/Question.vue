@@ -51,9 +51,8 @@
                 <div class="submit-button" @click="doTakePhotoNext"> 下一题</div>
             </div>
             <div class="answer-info" v-if="isAnswer">
-                <div class="answer-message">
-                    {{questions[questionIndex].questionInfo.substr(5, questions[questionIndex].questionInfo.length -
-                    1)}}
+                <div class="answer-message" v-html="questions[questionIndex].questionInfo.substr(5, questions[questionIndex].questionInfo.length -
+                    1)">
                 </div>
                 <div class="answer-message">
                     A：{{questions[questionIndex].selectA}} B：{{questions[questionIndex].selectB}}
@@ -155,7 +154,7 @@
                         info: '混合肌属于肌肤类型，不属于肌肤问题。'
                     },
                     {
-                        questionInfo: '(多选题)'+ '<br/>' +'特干肌应选择含有____成分的护肤品(15分，选对一项得3分，错选整题不得分)',
+                        questionInfo: '(多选题)'+ '<br/>' +'特干肌应选择含有____成分的护肤品<span style="color: #666; ">(15分，选对一项得3分，错选整题不得分)</span>',
                         selectA: '透明质酸',
                         selectB: '烟酰胺',
                         selectC: '水杨酸',
@@ -166,7 +165,7 @@
                             '主要用于消炎祛痘，不适合特干肌人群使用。'
                     },
                     {
-                        questionInfo: '(多选题)' + '<br/>' + '生物科技护肤品建立顾客档案要包含哪些内容(15分，选对一项得3分，错选整题不得分)',
+                        questionInfo: '(多选题)' + '<br/>' + '生物科技护肤品建立顾客档案要包含哪些内容<span style="color: #666; ">(15分，选对一项得3分，错选整题不得分)</span>',
                         selectA: '顾客信息',
                         selectB: '肌肤检测结果',
                         selectC: '问询结果',
@@ -177,7 +176,7 @@
                         info: '顾客档案不仅要包含联系信息，还要包含标准接待流程中产生的其他信息，如肌肤检测结果、问询结果、肌肤问题、所购产品等。'
                     },
                     {
-                        questionInfo: '(多选题)' + '<br/>' + '以下哪些可以是生物科技护肤品采用的水源(20分，选对一项得5分，错选整题不得分)',
+                        questionInfo: '(多选题)' + '<br/>' + '以下哪些可以是生物科技护肤品采用的水源<span style="color: #666; ">(20分，选对一项得5分，错选整题不得分)</span>',
                         selectA: '温泉水',
                         selectB: '矿泉水',
                         selectC: '高纯水',

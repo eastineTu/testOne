@@ -32,37 +32,37 @@ const route = new Router({
         {
             path: '/login',
             name: 'login',
-            meta: { title: '登陆' },
+            meta: { title: '【挑战新“肌愈”】' },
             component: Login
         },
         {
             path: '/question',
             name: 'question',
-            meta: { title: '问答' },
+            meta: { title: '【挑战新“肌愈”】' },
             component: Question
         },
         {
             path: '/empty',
             name: 'empty',
-            meta: { title: '展示' },
+            meta: { title: '【挑战新“肌愈”】' },
             component: Empty
         },
         {
             path: '/rule',
             name: 'rule',
-            meta: { title: '规则' },
+            meta: { title: '【挑战新“肌愈”】' },
             component: Rule
         },
         {
             path: '/finish',
             name: 'finish',
-            meta: { title: '完成' },
+            meta: { title: '【挑战新“肌愈”】' },
             component: Finish
         },
         {
             path: '/questionList',
             name: 'questionList',
-            meta: { title: '问题列表' },
+            meta: { title: '【挑战新“肌愈”】' },
             component: QuestionList
         }
     ]

@@ -1,26 +1,28 @@
 <template>
     <div class="all-login">
-        <img class="login-bg" src="../assets/login-bg.png"/>
-        <div class="login-info" v-if="!isLoginError">
-            <div class="login-name">
-                <img src="../assets/people.png"/>
-                <input type="text" placeholder="门店编号" v-model="code"/>
+        <div class="all-login-info">
+            <img class="login-bg" src="../assets/login-bg.png"/>
+            <div class="login-info" v-if="!isLoginError">
+                <div class="login-name">
+                    <img src="../assets/people.png"/>
+                    <input type="text" placeholder="门店编号" v-model="code"/>
+                </div>
+                <div class="login-name">
+                    <img src="../assets/phone.png"/>
+                    <input type="text" placeholder="手机号" v-model="phone"/>
+                </div>
             </div>
-            <div class="login-name">
-                <img src="../assets/phone.png"/>
-                <input type="text" placeholder="手机号" v-model="phone"/>
-            </div>
-        </div>
 
-        <div class="login-error" v-if="isLoginError">
-            <div class="error-title">
-                <img src="../assets/login-error.png"/> 无法登陆
+            <div class="login-error" v-if="isLoginError">
+                <div class="error-title">
+                    <img src="../assets/login-error.png"/> 无法登陆
+                </div>
+                <div class="error-info">1.您未入围</div>
+                <div class="error-info">2.门店编号或手机号输入有误</div>
             </div>
-            <div class="error-info">1.您未入围</div>
-            <div class="error-info">2.门店编号或手机号输入有误</div>
-        </div>
 
-        <img class="login-submit" :src=src @click="doLogin"/>
+            <img class="login-submit" :src=src @click="doLogin"/>
+        </div>
 
         <div class="login-bottom">请务必在您的门店内答题，我将全程对您实时定位</div>
 
@@ -173,65 +175,67 @@
         background: linear-gradient(to bottom, #ffffff, #e6ddf1, #e6ddf1, #e6ddf1, #3b6e9e);
         display flex
         flex-direction column
-        .login-submit
-            width 135px
-            height 135px
-            margin auto
-            margin-top -65px
-            text-align center
-        .login-bg
-            width 650px
-            margin-top 75px
-        .login-info
-            background #f5f3fb
-            border-radius 30px
-            padding 30px 30px
-            width 100%
-            height 460px
-            display flex
-            flex-direction column
-            .login-name
-                width 100%
-                height 100px
-                background #fff
+        .all-login-info
+            flex 1
+            .login-submit
+                width 135px
+                height 135px
+                margin auto
+                margin-top -65px
+                text-align center
+            .login-bg
+                width 650px
+                margin-top 75px
+            .login-info
+                background #f5f3fb
                 border-radius 30px
-                text-align left
+                padding 30px 30px
+                width 100%
+                height 460px
                 display flex
-                margin-top 50px
-                img
-                    text-align left
-                    margin-left 30px
-                    width 65px
-                    height 75px
-                    margin-top 12px
-                input
-                    margin-left 100px
-                    width 350px
-                    outline none
-                    font-size 50px
-                    color #3b6e9e
-                    background white
-                    border none
-        .login-error
-            background #f5f3fb
-            border-radius 30px
-            padding 30px 30px
-            margin-top 60px
-            width 100%
-            height 360px
-            text-align left
-            .error-title
-                font-size 70px
-                display flex
-                margin-left 80px
-                margin-top 30px
-                img
-                    width 100px
+                flex-direction column
+                .login-name
+                    width 100%
                     height 100px
-                    margin-right 20px
-            .error-info
-                margin-left 80px
-                font-size 40px
+                    background #fff
+                    border-radius 30px
+                    text-align left
+                    display flex
+                    margin-top 50px
+                    img
+                        text-align left
+                        margin-left 30px
+                        width 65px
+                        height 75px
+                        margin-top 12px
+                    input
+                        margin-left 100px
+                        width 350px
+                        outline none
+                        font-size 50px
+                        color #3b6e9e
+                        background white
+                        border none
+            .login-error
+                background #f5f3fb
+                border-radius 30px
+                padding 30px 30px
+                margin-top 60px
+                width 100%
+                height 360px
+                text-align left
+                .error-title
+                    font-size 70px
+                    display flex
+                    margin-left 80px
+                    margin-top 30px
+                    img
+                        width 100px
+                        height 100px
+                        margin-right 20px
+                .error-info
+                    margin-left 80px
+                    font-size 40px
         .login-bottom
             width 100%
             font-size 20px
