@@ -5,8 +5,7 @@
             <div class="question-info" v-if="isQuestion">
                 <img class="question-people" src="../assets/question_people.png"/>
                 <div class="title-name"> 神雕侠侣</div>
-                <progress :value='valueNum' max="100"></progress>
-                <div class="progress-value">{{valueNum}}%</div>
+                <img class="progress" :src="imgList[questionIndex].imgSrc" />
                 <div class="question-message" v-html="questions[questionIndex].questionInfo"></div>
                 <div class="select-input" v-if="questionIndex < 4">
                     <label><input name="Fruit" type="radio"
@@ -35,8 +34,7 @@
             <div class="question-info" v-if="isTakePhoto">
                 <img class="question-people" src="../assets/question_people.png"/>
                 <div class="title-name"> 神雕侠侣</div>
-                <progress :value='valueNum' max="100"></progress>
-                <div class="progress-value">{{valueNum}}%</div>
+                <img class="progress" :src="imgList[questionIndex].imgSrc" />
                 <div class="question-message">{{takePhotoInfos[questionIndex - 7].info}}</div>
                 <div class="select-input">
                     <label><input name="Fruit" type="radio" value="" checked/> A：是→上传照片 </label><br>
@@ -154,7 +152,7 @@
                         info: '混合肌属于肌肤类型，不属于肌肤问题。'
                     },
                     {
-                        questionInfo: '(多选题)'+ '<br/>' +'特干肌应选择含有____成分的护肤品<span style="color: #666; ">(15分，选对一项得3分，错选整题不得分)</span>',
+                        questionInfo: '(多选题)' + '<br/>' + '特干肌应选择含有____成分的护肤品<span style="color: #666; ">(15分，选对一项得3分，错选整题不得分)</span>',
                         selectA: '透明质酸',
                         selectB: '烟酰胺',
                         selectC: '水杨酸',
@@ -185,6 +183,18 @@
                         selectAnswer: '',
                         info: '《化妆品生产企业规范》2007规定生产用水的水质应达到国家生活饮用水卫生标准（GB5749-2006）的要求。'
                     }
+                ],
+                imgList: [
+                    {imgSrc: require('../assets/1.png')},
+                    {imgSrc: require('../assets/2.png')},
+                    {imgSrc: require('../assets/3.png')},
+                    {imgSrc: require('../assets/4.png')},
+                    {imgSrc: require('../assets/5.png')},
+                    {imgSrc: require('../assets/6.png')},
+                    {imgSrc: require('../assets/7.png')},
+                    {imgSrc: require('../assets/8.png')},
+                    {imgSrc: require('../assets/9.png')},
+                    {imgSrc: require('../assets/10.png')}
                 ]
             }
         },
@@ -397,16 +407,9 @@
                     margin-top 30px
                 .title-name
                     font-size 32px
-                progress
-                    border 2px solid #F2F2F2
+                .progress
                     width 350px
-                    height 8px
-                    color #f00;
-                    background #F2F2F2
-                    border-radius: 20px
-                .progress-value
-                    color #4A729F
-                    font-size 18px
+                    height 28px
                 .question-num
                     font-size 24px
                     margin 25px 0
