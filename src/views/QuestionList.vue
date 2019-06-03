@@ -1,7 +1,7 @@
 <template>
     <div class="all-questionList">
-        <div class="question-info" v-for="(item,index) in questions" :key="index">
-            <div> {{item.questionInfo}} </div>
+        <div v-if="false" class="question-info" v-for="(item,index) in questions" :key="index">
+            <div> {{item.questionInfo}}</div>
             <div style="display: flex">
                 <div v-if="item.selectA">A:{{item.selectA}}</div>
                 <div v-if="item.selectB">B:{{item.selectB}}</div>
@@ -11,42 +11,54 @@
             </div>
         </div>
 
-        <div class="questionList-title">
+        <div class="question-title">
+            <div>挑战新“肌愈”</div>
+        </div>
+
+        <div class="questionList-select">
             <div @click="changeChecked(false)"> 待确认</div>
             <div @click="changeChecked(true)"> 已确认</div>
         </div>
 
-        <div class="questionList">
-            <div> 门店编号</div>
-            <div> 第1题</div>
-            <div> 第2题</div>
-            <div> 第3题</div>
-            <div> 第4题</div>
-            <div> 第5题</div>
-            <div> 第6题</div>
-            <div> 第7题</div>
-            <div> 第8题</div>
-            <div> 第9题</div>
-            <div> 第10题</div>
-            <div> 得分</div>
-            <div> 确认</div>
+        <div class="questionList-info">
+
+            <div class="questionList-title">
+                <div  class="question-answer"> 答案</div>
+                <div> 店铺</div>
+                <div> 坐标</div>
+                <div> 得分</div>
+                <div> 答题日期</div>
+                <div> 照片</div>
+                <div> 状态</div>
+            </div>
+
+            <div class="questionList" v-for="(item,index) in questionList" :key="index">
+                <div class="question-answer"> 1:{{item.Q10[0]}},
+                    2:{{item.Q10[1]}},
+                    3:{{item.Q10[2]}},
+                    4:{{item.Q10[3]}},
+                    5:{{item.Q10[4]}},
+                    6:{{item.Q10[5]}},
+                    7:{{item.Q10[6]}},
+                    8:{{item.Q10[7]}},
+                    9:{{item.Q10[8]}},
+                    10:{{item.Q10[9]}}
+                </div>
+                <div> {{item.user.username}}</div>
+                <div> {{item.location.latitude}},{{item.location.longitude}}</div>
+                <div> {{item.count}}</div>
+                <div> {{item.createdAt}}</div>
+                <div>
+                    <img :src="item.image1.url" v-if="item.image1"/>
+                    <img :src="item.image2.url" v-if="item.image2"/>
+                    <img :src="item.image3.url" v-if="item.image3"/>
+                </div>
+                <div class="question-check" v-if="!isChecked" @click="checkItem(item)">确认</div>
+                <div class="question-check" v-if="isChecked" >已确认</div>
+            </div>
+
         </div>
 
-        <div class="questionList" v-for="(item,index) in questionList" :key="index">
-            <div> {{item.user.username}}</div>
-            <div> {{item.Q10[0]}}</div>
-            <div> {{item.Q10[1]}}</div>
-            <div> {{item.Q10[2]}}</div>
-            <div> {{item.Q10[3]}}</div>
-            <div> {{item.Q10[4]}}</div>
-            <div> {{item.Q10[5]}}</div>
-            <div> {{item.Q10[6]}}</div>
-            <div> {{item.Q10[7]}}</div>
-            <div> {{item.Q10[8]}}</div>
-            <div> {{item.Q10[9]}}</div>
-            <div> {{item.count}}</div>
-            <div class="question-check" @click="checkItem(item)">确认</div>
-        </div>
     </div>
 </template>
 
@@ -135,7 +147,8 @@
                         questionInfo: '(图片题）8：是否有独立的体验区（10分)',
                         selectAnswer: ''
                     },
-                    {   questionInfo: '(图片题）9：是否有美容仪器（10分)',
+                    {
+                        questionInfo: '(图片题）9：是否有美容仪器（10分)',
                         selectAnswer: ''
                     },
                     {
@@ -150,21 +163,19 @@
                 const query = this.$bmob.Query("question", "_User");
                 query.include('user')
                 query.equalTo("checked", "==", this.isChecked);
-                query.limit(1000)
+                query.limit(100)
                 query.find().then(res => {
                     this.questionList = res
                     console.log(res)
                 });
             },
             checkItem(item) {
-                if(!this.isChecked) {
+                if (!this.isChecked) {
                     const query = this.$bmob.Query('question');
                     query.get(item.objectId).then(res => {
-                        console.log(res)
                         res.set('checked', true)
                         res.save()
                     }).catch(err => {
-                        console.log(err)
                     })
                 }
             },
@@ -181,31 +192,67 @@
 
 <style lang="stylus" scoped>
     .all-questionList
-        .questionList-title
+        width 100%
+        height 100%
+        .question-title
+            font-size 20px
+            color white
+            background #2196F3
+            height 40px
+        .questionList-select
+            padding-left 40px
             display flex
+            background #2196F3
             div
                 width 100px
                 color white
-                background #3b6e9e
                 border-radius 20px
                 margin-right 30px
                 height 30px
                 line-height 30px
         .question-info
             text-align left
-        .questionList
+        .questionList-info
+            height 100%
+            padding 0 40px
+            background #F5F5F5
+        .questionList-title
+            height 24px
+            color #9E9E9E
             overflow-y scroll
-            border-bottom 3PX solid #f1f1f1
+            margin-bottom 8px
+            background #F5F5F5
+            font-size 10px
+            line-height 24px
             display flex
+            border-bottom 1PX solid #E0E0E0
+            .question-answer
+                flex 2
             div
                 flex 1
                 text-align left
-                border 1PX solid #f1f1f1
+        .questionList
+            height 34px
+            color #777
+            overflow-y scroll
+            background white
+            line-height 34px
+            font-size 10px
+            display flex
+            border-bottom 4px solid #F5F5F5
+            .question-answer
+                padding-left 10px
+                flex 2
+            div
+                flex 1
+                text-align left
+                img
+                    width 22px
+                    height 22px
+                    margin-right 10px
             .question-check
                 flex 1
-                background #3b6e9e
                 border-radius 20px
                 text-align center
-                color white
 
 </style>
