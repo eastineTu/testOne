@@ -19,11 +19,15 @@
             <div @click="changeChecked(false)"> 待确认</div>
             <div @click="changeChecked(true)"> 已确认</div>
         </div>
+        <div class="bar">
+            <div class="color" v-if="!isChecked"></div>
+            <div class="color2" v-if="isChecked"></div>
+        </div>
 
         <div class="questionList-info">
 
             <div class="questionList-title">
-                <div  class="question-answer"> 答案</div>
+                <div class="question-answer"> 答案</div>
                 <div> 店铺</div>
                 <div> 坐标</div>
                 <div> 得分</div>
@@ -45,18 +49,22 @@
                     10:{{item.Q10[9]}}
                 </div>
                 <div> {{item.user.username}}</div>
-                <div> {{item.location.latitude}},{{item.location.longitude}}</div>
+                <div> {{item.location.latitude}}<br>{{item.location.longitude}}</div>
                 <div> {{item.count}}</div>
                 <div> {{item.createdAt}}</div>
                 <div>
-                    <img :src="item.image1.url" v-if="item.image1"/>
-                    <img :src="item.image2.url" v-if="item.image2"/>
-                    <img :src="item.image3.url" v-if="item.image3"/>
+                    <img :src="item.image1.url" v-if="item.image1" @click="clickedImg(item.image1.url)"/>
+                    <img :src="item.image2.url" v-if="item.image2" @click="clickedImg(item.image2.url)"/>
+                    <img :src="item.image3.url" v-if="item.image3" @click="clickedImg(item.image3.url)"/>
                 </div>
                 <div class="question-check" v-if="!isChecked" @click="checkItem(item)">确认</div>
-                <div class="question-check" v-if="isChecked" >已确认</div>
+                <div class="question-check" v-if="isChecked">已确认</div>
             </div>
 
+        </div>
+
+        <div class="question-big-image" v-if="isShowBigImage" @click="closeImg">
+            <img :src="bigImage"/>
         </div>
 
     </div>
@@ -155,7 +163,9 @@
                         questionInfo: '(图片题）10：店内是否有生物科技护肤品的陈列（10分)',
                         selectAnswer: '',
                     }
-                ]
+                ],
+                bigImage: '',
+                isShowBigImage: false
             }
         },
         methods: {
@@ -166,22 +176,27 @@
                 query.limit(100)
                 query.find().then(res => {
                     this.questionList = res
-                    console.log(res)
                 });
             },
             checkItem(item) {
-                if (!this.isChecked) {
-                    const query = this.$bmob.Query('question');
-                    query.get(item.objectId).then(res => {
-                        res.set('checked', true)
-                        res.save()
-                    }).catch(err => {
-                    })
-                }
+                const query = this.$bmob.Query('question');
+                query.get(item.objectId).then(res => {
+                    res.set('checked', true)
+                    res.save()
+                })
+                this.getList()
             },
             changeChecked(is) {
                 this.isChecked = is
                 this.getList()
+            },
+            clickedImg(url) {
+                this.bigImage = url
+                this.isShowBigImage = true
+            },
+            closeImg() {
+                this.bigImage = ""
+                this.isShowBigImage = false
             }
         },
         created() {
@@ -232,11 +247,9 @@
                 flex 1
                 text-align left
         .questionList
-            height 34px
             color #777
             overflow-y scroll
             background white
-            line-height 34px
             font-size 10px
             display flex
             border-bottom 4px solid #F5F5F5
@@ -255,4 +268,32 @@
                 border-radius 20px
                 text-align center
 
+        .question-big-image
+            width 100%
+            height 100%
+            background rgba(0, 0, 0, 0.3)
+            text-align center
+            position absolute
+            top 0
+            left 0
+            img
+                margin-top 100px
+                width 300px
+        .bar
+            padding-left 40px
+            width 100%
+            height 3px
+            display flex
+            .color
+                width 70px
+                background #2196F3
+                margin-left 15px
+                height 3px
+                line-height 3px
+            .color2
+                width 70px
+                background #2196F3
+                margin-left 145px
+                height 3px
+                line-height 3px
 </style>
