@@ -64,7 +64,9 @@
         </div>
 
         <div class="loading-more" @click="loadingMore">
-            加载更多
+            <div>
+                加载更多
+            </div>
         </div>
 
         <div class="question-big-image" v-if="isShowBigImage" @click="closeImg">
@@ -170,9 +172,12 @@
                 ],
                 bigImage: '',
                 isShowBigImage: false,
-                skipNum: 0,
+                skipNumLeft: 0,
+                skipNumRight: 0,
+                isHasNextLeft: true,
+                isHasNextRight: true,
                 page: 1,
-                pageSize: 20
+                pageSize: 10
             }
         },
         methods: {
@@ -181,9 +186,19 @@
                 query.include('user')
                 query.equalTo("checked", "==", this.isChecked);
                 query.limit(this.pageSize)
-                query.skip(this.skipNum)
+                if (this.isChecked) {
+                    query.skip(this.skipNumRight)
+                } else {
+                    query.skip(this.skipNumLeft)
+                }
                 query.find().then(res => {
                     this.questionList = res
+                    if ( this.isChecked && this.questionList.length < this.pageSize) {
+                        this.isHasNextRight = false
+                    }
+                    if (!this.isChecked && this.questionList.length < this.pageSize) {
+                        this.isHasNextLeft = false
+                    }
                 });
             },
             checkItem(item) {
@@ -206,9 +221,32 @@
                 this.bigImage = ""
                 this.isShowBigImage = false
             },
+            showToast(msg, duration) {
+                duration = isNaN(duration) ? 3000 : duration;
+                var m = document.createElement('div');
+                m.innerHTML = msg;
+                m.style.cssText = "width:60%; min-width:180px; background:#000; opacity:0.6; height:auto;min-height: 30px; color:#fff; line-height:30px; text-align:center; border-radius:4px; position:fixed; top:60%; left:20%; z-index:999999;";
+                document.body.appendChild(m);
+                setTimeout(function () {
+                    var d = 0.5;
+                    m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                    m.style.opacity = '0';
+                    setTimeout(function () {
+                        document.body.removeChild(m)
+                    }, d * 1000);
+                }, duration);
+            },
             loadingMore() {
-                this.page = this.page + 1
-                this.skipNum = this.pageSize * (this.page - 1)
+                if (this.isChecked && this.isHasNextRight) {
+                    this.page = this.page + 1
+                    this.skipNumRight = this.pageSize * (this.page - 1)
+                } else if(!this.isChecked && this.isHasNextLeft) {
+                    this.page = this.page + 1
+                    this.skipNumLeft = this.pageSize * (this.page - 1)
+                } else {
+                    this.showToast('没有更多了')
+                }
+
                 this.getList()
             }
         },
@@ -241,7 +279,6 @@
         .question-info
             text-align left
         .questionList-info
-            height 100%
             padding 0 40px
             background #F5F5F5
         .questionList-title
@@ -266,9 +303,6 @@
             font-size 10px
             display flex
             border-bottom 4px solid #F5F5F5
-            .question-answer
-                padding-left 10px
-                flex 2
             div
                 height 34px
                 line-height 34px
@@ -282,6 +316,11 @@
                 flex 1
                 border-radius 20px
                 text-align left
+            .question-answer
+                height 34px
+                line-height 17px
+                padding-left 10px
+                flex 2
             .question-location
                 height 34px
                 line-height 17px
@@ -297,15 +336,17 @@
                 margin-top 100px
                 width 300px
         .loading-more
-            width 81px
+            width 100%
             height 28px
-            line-height 28px
-            bottom 0
-            left 50%
-            font-size 10px
-            background #2196F3
-            position absolute
-            color white
+            margin-bottom 30px
+            div
+                margin auto
+                color white
+                width 81px
+                background #2196F3
+                height 28px
+                line-height 28px
+                font-size 10px
         .bar
             padding-left 40px
             width 100%
