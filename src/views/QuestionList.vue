@@ -49,7 +49,7 @@
                     10:{{item.Q10[9]}}
                 </div>
                 <div> {{item.user.username}}</div>
-                <div> {{item.location.latitude}}<br>{{item.location.longitude}}</div>
+                <div class="question-location"> {{item.location.latitude}}<br>{{item.location.longitude}}</div>
                 <div> {{item.count}}</div>
                 <div> {{item.createdAt}}</div>
                 <div>
@@ -61,6 +61,10 @@
                 <div class="question-check" v-if="isChecked">已确认</div>
             </div>
 
+        </div>
+
+        <div class="loading-more" @click="loadingMore">
+            加载更多
         </div>
 
         <div class="question-big-image" v-if="isShowBigImage" @click="closeImg">
@@ -165,7 +169,10 @@
                     }
                 ],
                 bigImage: '',
-                isShowBigImage: false
+                isShowBigImage: false,
+                skipNum: 0,
+                page: 1,
+                pageSize: 20
             }
         },
         methods: {
@@ -173,7 +180,8 @@
                 const query = this.$bmob.Query("question", "_User");
                 query.include('user')
                 query.equalTo("checked", "==", this.isChecked);
-                query.limit(100)
+                query.limit(this.pageSize)
+                query.skip(this.skipNum)
                 query.find().then(res => {
                     this.questionList = res
                 });
@@ -197,6 +205,11 @@
             closeImg() {
                 this.bigImage = ""
                 this.isShowBigImage = false
+            },
+            loadingMore() {
+                this.page = this.page + 1
+                this.skipNum = this.pageSize * (this.page - 1)
+                this.getList()
             }
         },
         created() {
@@ -257,6 +270,8 @@
                 padding-left 10px
                 flex 2
             div
+                height 34px
+                line-height 34px
                 flex 1
                 text-align left
                 img
@@ -266,8 +281,10 @@
             .question-check
                 flex 1
                 border-radius 20px
-                text-align center
-
+                text-align left
+            .question-location
+                height 34px
+                line-height 17px
         .question-big-image
             width 100%
             height 100%
@@ -279,6 +296,16 @@
             img
                 margin-top 100px
                 width 300px
+        .loading-more
+            width 81px
+            height 28px
+            line-height 28px
+            bottom 0
+            left 50%
+            font-size 10px
+            background #2196F3
+            position absolute
+            color white
         .bar
             padding-left 40px
             width 100%
