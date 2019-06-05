@@ -37,16 +37,21 @@
             </div>
 
             <div class="questionList" v-for="(item,index) in questionList" :key="index">
-                <div class="question-answer"> 1:{{item.Q10[0]}},
-                    2:{{item.Q10[1]}},
-                    3:{{item.Q10[2]}},
-                    4:{{item.Q10[3]}},
-                    5:{{item.Q10[4]}},
-                    6:{{item.Q10[5]}},
-                    7:{{item.Q10[6]}},
-                    8:{{item.Q10[7]}},
-                    9:{{item.Q10[8]}},
-                    10:{{item.Q10[9]}}
+                <div class="question-answer">
+                    <img class="selected" v-if="isChecked" src="../assets/radio-icon.png" @click="checkItem(item)"/>
+                    <img class="selected" v-if="!isChecked" src="../assets/radio-icon-unselect.png" @click="checkItem(item)"/>
+                    <div>
+                        1:{{item.Q10[0]}},
+                        2:{{item.Q10[1]}},
+                        3:{{item.Q10[2]}},
+                        4:{{item.Q10[3]}},
+                        5:{{item.Q10[4]}},
+                        6:{{item.Q10[5]}},
+                        7:{{item.Q10[6]}},
+                        8:{{item.Q10[7]}},
+                        9:{{item.Q10[8]}},
+                        10:{{item.Q10[9]}}
+                    </div>
                 </div>
                 <div> {{item.user.username}}</div>
                 <div class="question-location"> {{item.location.latitude}}<br>{{item.location.longitude}}</div>
@@ -57,8 +62,13 @@
                     <img :src="item.image2.url" v-if="item.image2" @click="clickedImg(item.image2.url)"/>
                     <img :src="item.image3.url" v-if="item.image3" @click="clickedImg(item.image3.url)"/>
                 </div>
-                <div class="question-check" v-if="!isChecked" @click="checkItem(item)">确认</div>
-                <div class="question-check" v-if="isChecked">已确认</div>
+                <div class="question-check" v-if="!isChecked">
+                    待确认
+                </div>
+                <div class="question-check" v-if="isChecked">
+                    <img class="selected" v-if="isChecked" src="../assets/icon-point.png"/>
+                    已确认
+                </div>
             </div>
 
         </div>
@@ -202,12 +212,15 @@
                 });
             },
             checkItem(item) {
+                let thit = this
                 const query = this.$bmob.Query('question');
                 query.get(item.objectId).then(res => {
-                    res.set('checked', true)
+                    res.set('checked', !thit.isChecked)
                     res.save()
                 })
-                this.getList()
+                setTimeout(function () {
+                    thit.getList()
+                }, 1000);
             },
             changeChecked(is) {
                 this.isChecked = is
@@ -315,12 +328,21 @@
             .question-check
                 flex 1
                 border-radius 20px
-                text-align left
+                line-height 34px
+                text-align center
             .question-answer
                 height 34px
-                line-height 17px
+                line-height 34px
                 padding-left 10px
                 flex 2
+                display flex
+                .selected
+                    margin-top 8px
+                    width 15px
+                    height 15px
+                div
+                    height 34px
+                    line-height 17px
             .question-location
                 height 34px
                 line-height 17px
@@ -339,6 +361,7 @@
             width 100%
             height 28px
             margin-bottom 30px
+            margin-top 30px
             div
                 margin auto
                 color white
@@ -352,15 +375,16 @@
             width 100%
             height 3px
             display flex
+            background #2196F3
             .color
                 width 70px
-                background #2196F3
+                background white
                 margin-left 15px
                 height 3px
                 line-height 3px
             .color2
                 width 70px
-                background #2196F3
+                background white
                 margin-left 145px
                 height 3px
                 line-height 3px
