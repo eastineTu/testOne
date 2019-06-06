@@ -4,12 +4,13 @@
         <div class="all-question-info">
             <div class="question-info">
                 <img src="../assets/login-bg.png"/>
-                <div class="title"> 1-7题一共{{valueNum}}分</div>
-                <div class="progress-value">请于7月30日后通过以下渠道查询晋级名单：贝德玛官方网站，
+                <div class="title" v-if="isFirst"> 1-7题<br>一共 <a>{{valueNum}}</a>分</div>
+                <div class="progress-value" v-if="!isFirst">请于7月30日后通过以下渠道查询晋级名单：贝德玛官方网站，
                     官方微信公众号（法国贝德玛）,贝德玛学院。晋级者可与贝德玛销售人员联系确认。
                     排名规则：单选和多选题、图片题以及店铺设施配合度得分相加后进行排名。
                 </div>
-                <div class="submit-button" @click="doFinish"> 关闭</div>
+                <div class="submit-button" @click="doNext" v-if="isFirst"> 下一步</div>
+                <div class="submit-button" @click="doFinish" v-if="!isFirst"> 关闭</div>
             </div>
         </div>
     </div>
@@ -20,12 +21,16 @@
         name: "Rule",
         data() {
             return {
-                valueNum: ''
+                valueNum: '',
+                isFirst: true
             }
         },
         methods: {
             doFinish() {
                 WeixinJSBridge.call('closeWindow');
+            },
+            doNext() {
+                this.isFirst = false
             }
         },
         created() {
@@ -63,7 +68,7 @@
                 background white
                 margin: auto
                 border 1PX solid #4875a2
-                min-height 600px
+                min-height 500px
                 width 100%
                 img
                     width 325px
@@ -71,9 +76,13 @@
                 .title
                     margin-top 30px
                     font-size 45px
+                    a
+                        font-size 55px
+                        color red
                 .progress-value
                     font-size 30px
                     text-align left
+                    color #666
                     padding 50px 20px
                 .submit-button
                     width 175px

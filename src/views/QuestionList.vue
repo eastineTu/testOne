@@ -73,7 +73,7 @@
 
         </div>
 
-        <div class="loading-more" @click="loadingMore">
+        <div class="loading-more" @click="loadingMore" v-if="isHasNext">
             <div>
                 加载更多
             </div>
@@ -93,6 +93,7 @@
             return {
                 questionList: [],
                 isChecked: false,
+                isHasMore: true,
                 questions: [
                     {
                         questionInfo: '(单选题)1：适合敏感肌肤的清洁类产品可以包含以下哪项(2分)',
@@ -186,6 +187,7 @@
                 skipNumRight: 0,
                 isHasNextLeft: true,
                 isHasNextRight: true,
+                isHasNext: true,
                 page: 1,
                 pageSize: 10
             }
@@ -203,6 +205,11 @@
                 }
                 query.find().then(res => {
                     this.questionList = res
+
+                    if(this.questionList.length < this.pageSize) {
+                        this.isHasNext = false
+                    }
+
                     if ( this.isChecked && this.questionList.length < this.pageSize) {
                         this.isHasNextRight = false
                     }
@@ -224,6 +231,7 @@
             },
             changeChecked(is) {
                 this.isChecked = is
+                this.questionList = []
                 this.getList()
             },
             clickedImg(url) {

@@ -5,7 +5,7 @@
             <div class="question-info" v-if="isQuestion">
                 <img class="question-people" src="../assets/question_people.png"/>
                 <div class="title-name"> 神雕侠侣</div>
-                <img class="progress" :src="imgList[questionIndex].imgSrc" />
+                <img class="progress" :src="imgList[questionIndex].imgSrc"/>
                 <div class="question-message" v-html="questions[questionIndex].questionInfo"></div>
                 <div class="select-input" v-if="questionIndex < 4">
                     <label><input name="Fruit" type="radio"
@@ -34,11 +34,11 @@
             <div class="question-info" v-if="isTakePhoto">
                 <img class="question-people" src="../assets/question_people.png"/>
                 <div class="title-name"> 神雕侠侣</div>
-                <img class="progress" :src="imgList[questionIndex].imgSrc" />
+                <img class="progress" :src="imgList[questionIndex].imgSrc"/>
                 <div class="question-message">{{takePhotoInfos[questionIndex - 7].info}}</div>
                 <div class="select-input">
-                    <label><input name="Fruit" type="radio" value="" checked/> A：是→上传照片 </label><br>
-                    <label><input name="Fruit" type="radio" value=""/> B：否 </label>
+                    <label><input name="Fruit" type="radio" value="A" checked/> A：是→上传照片 </label><br>
+                    <label><input name="Fruit" type="radio" value="B"/> B：否 </label>
                 </div>
                 <div class="select-photo">
                     <!-- 上传图片 -->
@@ -97,6 +97,7 @@
                 img1: '',
                 img2: '',
                 img3: '',
+                imgNext: true,
                 takePhotoInfos: [{
                     info: '(图片题）是否有独立的体验区（10分)',
                     selectAnswer: '',
@@ -293,30 +294,57 @@
                     this.clickAble = true
                 }
             },
+            getTakePhotoRadioValue(img) {
+                let obj = document.getElementsByName("Fruit")
+                for (let i = 0; i < obj.length; i++) {
+                    if (obj[i].checked) {
+                        if (obj[i].value === 'A') {
+                            if(!img) {
+                                this.imgNext = false
+                                this.showToast('您还没有上传图片！', 1000)
+                                break
+                            } else {
+                                this.imgNext = true
+                            }
+                        } else {
+                            this.imgNext = true
+                        }
+                    }
+                }
+            },
             doTakePhotoNext() {
                 if (this.questionIndex === 9) {
+                    this.getTakePhotoRadioValue(this.img3)
                     if (this.img3) {
                         this.takePhotoInfos[this.questionIndex - 7].selectAnswer = 'A'
                     } else {
                         this.takePhotoInfos[this.questionIndex - 7].selectAnswer = 'B'
                     }
-                    this.doFinish()
+                    if (this.imgNext) {
+                        this.doFinish()
+                    }
                 } else if (this.questionIndex === 8) {
+                    this.getTakePhotoRadioValue(this.img2)
                     if (this.img2) {
                         this.takePhotoInfos[this.questionIndex - 7].selectAnswer = 'A'
                     } else {
                         this.takePhotoInfos[this.questionIndex - 7].selectAnswer = 'B'
                     }
-                    this.questionIndex += 1
-                    this.valueNum += 10
+                    if (this.imgNext) {
+                        this.questionIndex += 1
+                        this.valueNum += 10
+                    }
                 } else if (this.questionIndex === 7) {
+                    this.getTakePhotoRadioValue(this.img1)
                     if (this.img1) {
                         this.takePhotoInfos[this.questionIndex - 7].selectAnswer = 'A'
                     } else {
                         this.takePhotoInfos[this.questionIndex - 7].selectAnswer = 'B'
                     }
-                    this.questionIndex += 1
-                    this.valueNum += 10
+                    if (this.imgNext) {
+                        this.questionIndex += 1
+                        this.valueNum += 10
+                    }
                 }
             },
             doFinish() {
