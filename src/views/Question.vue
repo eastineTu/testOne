@@ -58,9 +58,14 @@
                 <div class="answer-message">
                     C：{{questions[questionIndex].selectC}} D：{{questions[questionIndex].selectD}}
                 </div>
+                <div class="answer-message" v-if="questions[questionIndex].selectE">
+                    E：{{questions[questionIndex].selectE}}
+                </div>
+
                 <div class="answer-info-value">
                     <div class="title">答案：</div>
-                    <div class="answer-info-info">{{questions[questionIndex].answer}} {{questions[questionIndex].answer2}}</div>
+                    <div class="answer-info-info" v-html="questions[questionIndex].answer2">
+                    </div>
                 </div>
                 <div class="answer-info-value">
                     <div class="title">解析：</div>
@@ -119,7 +124,7 @@
                         selectC: '人工防腐剂',
                         selectD: '氨基酸',
                         answer: 'D',
-                        answer2: '氨基酸',
+                        answer2: 'D 氨基酸',
                         selectAnswer: '',
                         info: '氨基酸类洁面温和不刺激，适合敏感肌肤使用 。'
                     },
@@ -130,7 +135,7 @@
                         selectC: '真皮层',
                         selectD: '皮下组织',
                         answer: 'A',
-                        answer2: '角质层',
+                        answer2: 'A 角质层',
                         selectAnswer: '',
                         info: '皮肤分为三大层：表皮层、真皮层、皮下组织，而表皮层又分为5小层：角质层、透明层、颗粒层、有棘层、基底层。'
                     },
@@ -141,7 +146,7 @@
                         selectC: '专业的彩妆技巧',
                         selectD: '熟练标准的接待流程',
                         answer: 'C',
-                        answer2: '专业的彩妆技巧',
+                        answer2: 'C 专业的彩妆技巧',
                         selectAnswer: '',
                         info: '生物科技护肤品销售人员的职业准则包含：专业皮肤知识，整洁的仪容仪表，' +
                             '熟练的接待流程和专业的护肤手法及服务，熟知生物科技护肤品的理念和产品。'
@@ -152,7 +157,7 @@
                         selectB: '特干',
                         selectC: '混合',
                         selectD: '痤疮',
-                        answer2: '混合',
+                        answer2: 'C 混合',
                         answer: 'C',
                         selectAnswer: '',
                         info: '混合肌属于肌肤类型，不属于肌肤问题。'
@@ -164,7 +169,7 @@
                         selectC: '水杨酸',
                         selectD: '甘油',
                         answer: 'ABD',
-                        answer2: '透明质酸、烟酰胺、甘油',
+                        answer2: 'A 透明质酸' + '<br/>' + 'B 烟酰胺' + '<br/>' + 'D 甘油',
                         selectAnswer: '',
                         info: '对于有特干肌问题的人群来说，应选用含有增湿剂、润肤剂等成分的护肤品，而水杨酸刺激性过强，' +
                             '主要用于消炎祛痘，不适合特干肌人群使用。'
@@ -177,7 +182,7 @@
                         selectD: '肌肤问题',
                         selectE: '所购产品',
                         answer: 'ABCDE',
-                        answer2: '顾客信息、肌肤检测结果、问询结果、肌肤问题、所购产品',
+                        answer2: 'A 顾客信息' + '<br/>' + 'B 肌肤检测结果' + '<br/>' + 'C 问询结果' + '<br/>' + 'D 肌肤问题' + '<br/>' + 'E 所购产品',
                         selectAnswer: '',
                         info: '顾客档案不仅要包含联系信息，还要包含标准接待流程中产生的其他信息，如肌肤检测结果、问询结果、肌肤问题、所购产品等。'
                     },
@@ -188,7 +193,7 @@
                         selectC: '高纯水',
                         selectD: '饮用水',
                         answer: 'ABCD',
-                        answer2: '温泉水、矿泉水、高纯水、饮用水',
+                        answer2: 'A 温泉水' + '<br/>' + 'B 矿泉水' + '<br/>' + 'C 高纯水' + '<br/>' + 'D 饮用水',
                         selectAnswer: '',
                         info: '《化妆品生产企业规范》2007规定生产用水的水质应达到国家生活饮用水卫生标准（GB5749-2006）的要求。'
                     }
@@ -282,7 +287,7 @@
                         Qs.push(item.selectAnswer)
                     }
                 })
-                if(Qs.length > 0) {
+                if (Qs.length > 0) {
                     this.answer = Qs.toString()
                     localStorage.setItem('answerStr', this.answerStr)
                 }
@@ -338,7 +343,7 @@
                 for (let i = 0; i < obj.length; i++) {
                     if (obj[i].checked) {
                         if (obj[i].value === 'A') {
-                            if(!img) {
+                            if (!img) {
                                 this.imgNext = false
                                 this.showToast('您还没有上传图片！', 1000)
                                 break
@@ -406,12 +411,12 @@
                 query.set("location", point)
                 let Q10 = this.answer.split(',')
                 this.questions.forEach((item) => {
-                    if(item.selectAnswer) {
+                    if (item.selectAnswer) {
                         Q10.push(item.selectAnswer)
                     }
                 })
                 this.takePhotoInfos.forEach((item) => {
-                    if(item.selectAnswer) {
+                    if (item.selectAnswer) {
                         Q10.push(item.selectAnswer)
                     }
                 })
@@ -439,7 +444,7 @@
             console.log('qqq>>>>>' + this.userId)
 
             this.questionIndex = parseInt(localStorage.getItem("questionIndex"))
-            this.valueNum =  parseInt(localStorage.getItem("valueNum"))
+            this.valueNum = parseInt(localStorage.getItem("valueNum"))
             if (!this.questionIndex) {
                 this.questionIndex = 0
                 this.valueNum = 10
