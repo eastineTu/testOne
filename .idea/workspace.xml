@@ -3,12 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="20d068d5-402d-4a94-8430-be0c1901d6e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/babel-loader/3382aa7fe0ed1e14fbdb7231945d409f.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/3382aa7fe0ed1e14fbdb7231945d409f.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/babel-loader/4689cb0d205f9fb6b8bc9d0c37e1fbd1.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/4689cb0d205f9fb6b8bc9d0c37e1fbd1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/babel-loader/86c6c38756d2e74434615bbabfabef22.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/86c6c38756d2e74434615bbabfabef22.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/1014dd9a9e05ce861d0b821e7ef195af.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/1014dd9a9e05ce861d0b821e7ef195af.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/132cb2020574689ec8ab7bb820f0489c.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/132cb2020574689ec8ab7bb820f0489c.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/389a41d4e2b2eab6cd2513a0a0d6dcb7.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/389a41d4e2b2eab6cd2513a0a0d6dcb7.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/3c0902feba112b898a9c7f9fff21b660.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/3c0902feba112b898a9c7f9fff21b660.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/3c24098afa077c0df4645eb5b1da10bf.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/3c24098afa077c0df4645eb5b1da10bf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/4ddcb038025c313f9ed0ac3fe4ea30c3.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/4ddcb038025c313f9ed0ac3fe4ea30c3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/57072fbeefef464010c48bee469c273c.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/57072fbeefef464010c48bee469c273c.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/70fb568398db7d779eed21299bc4fd33.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/70fb568398db7d779eed21299bc4fd33.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/7f5c0dfaee08fb5e025c249a0b1bd305.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/7f5c0dfaee08fb5e025c249a0b1bd305.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/9935d4f1a901080e8bf955d7924af919.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/9935d4f1a901080e8bf955d7924af919.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/9fc6c78080f166304fb850eee6b4e885.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/9fc6c78080f166304fb850eee6b4e885.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/a2a32261d7deb84149320ad2098d242a.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/a2a32261d7deb84149320ad2098d242a.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Finish.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Finish.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Question.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Question.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/a5a651d6318f3300184525802a7e1611.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/a5a651d6318f3300184525802a7e1611.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/ab6c83b74b97bf0d9a3a1b86cc731c42.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/ab6c83b74b97bf0d9a3a1b86cc731c42.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/c29c4705ae1f5f2d681a3990f067b324.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/c29c4705ae1f5f2d681a3990f067b324.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/d2c0eaaafab97414abcd0b4642298c21.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/d2c0eaaafab97414abcd0b4642298c21.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/e788d0bba5cf2ed0f41f2fd27f6bdcf2.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/e788d0bba5cf2ed0f41f2fd27f6bdcf2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/f48cf68d261075b5dafb50ff0aff46ae.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/f48cf68d261075b5dafb50ff0aff46ae.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/QuestionList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/QuestionList.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -24,14 +39,14 @@
     <session id="1555048345">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
-          <entry key="project.open.time.0" value="4" />
+          <entry key="project.closed" value="19" />
+          <entry key="project.open.time.0" value="10" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="2" />
           <entry key="project.open.time.5" value="4" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -41,7 +56,7 @@
           <entry key="html" value="2" />
           <entry key="ico" value="1" />
           <entry key="jpg" value="1" />
-          <entry key="js" value="13" />
+          <entry key="js" value="14" />
           <entry key="md" value="1" />
           <entry key="png" value="4" />
           <entry key="rnc" value="1" />
@@ -54,7 +69,7 @@
           <entry key="CSS" value="2" />
           <entry key="HTML" value="2" />
           <entry key="Image" value="6" />
-          <entry key="JavaScript" value="13" />
+          <entry key="JavaScript" value="14" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="RNG Compact" value="1" />
           <entry key="TypeScript" value="5" />
@@ -63,53 +78,57 @@
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="ESLintLanguageService" value="13" />
+          <entry key="ESLintLanguageService" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="js" value="63" />
           <entry key="md" value="1" />
-          <entry key="vue" value="4826" />
+          <entry key="vue" value="4840" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JavaScript" value="63" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Vue.js" value="4826" />
+          <entry key="Vue.js" value="4840" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/QuestionList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="75" column="72" lean-forward="true" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
+            <state relative-caret-position="143">
+              <caret line="319" column="21" selection-start-line="319" selection-start-column="21" selection-end-line="319" selection-end-column="21" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#template#0;n#!!top" />
-                <element signature="e#3679#7391#0" />
-                <element signature="e#3701#4093#0" />
+                <element signature="e#3578#7762#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/Question.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="326" column="58" lean-forward="true" selection-start-line="326" selection-start-column="58" selection-end-line="326" selection-end-column="58" />
+            <state relative-caret-position="5775">
+              <caret line="385" column="32" selection-start-line="385" selection-start-column="32" selection-end-line="385" selection-end-column="32" />
               <folding>
-                <element signature="e#5731#9141#0" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="e#15450#16880#0" />
+                <element signature="e#4486#4532#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/unit.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -126,8 +145,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="158" column="35" lean-forward="true" selection-start-line="158" selection-start-column="35" selection-end-line="158" selection-end-column="35" />
+            <state relative-caret-position="2205">
+              <caret line="147" column="52" lean-forward="true" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -144,7 +163,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>imgSrc</find>
       <find>photoCompress</find>
       <find>this.user</find>
       <find>fa</find>
@@ -162,10 +180,8 @@
       <find>question-message</find>
       <find>questionList-title</find>
       <find>question-big-image</find>
-      <find>questionList-select</find>
       <find>questionList</find>
       <find>bar</find>
-      <find>questionList-info</find>
       <find>toas</find>
       <find>question-check</find>
       <find>question-answer</find>
@@ -174,6 +190,9 @@
       <find>changeChecked</find>
       <find>isHasNextRight</find>
       <find>progress-value</find>
+      <find>pushHistory</find>
+      <find>questionList-select</find>
+      <find>questionList-info</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -192,9 +211,9 @@
         <option value="$PROJECT_DIR$/src/views/Rule.vue" />
         <option value="$PROJECT_DIR$/src/router.js" />
         <option value="$PROJECT_DIR$/src/views/Login.vue" />
-        <option value="$PROJECT_DIR$/src/views/QuestionList.vue" />
         <option value="$PROJECT_DIR$/src/views/Finish.vue" />
         <option value="$PROJECT_DIR$/src/views/Question.vue" />
+        <option value="$PROJECT_DIR$/src/views/QuestionList.vue" />
       </list>
     </option>
   </component>
@@ -215,8 +234,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="57" />
-    <option name="y" value="28" />
+    <option name="x" value="145" />
+    <option name="y" value="37" />
     <option name="width" value="1295" />
     <option name="height" value="808" />
   </component>
@@ -225,7 +244,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -242,12 +260,19 @@
               <item name="testOne" type="b2602c69:ProjectViewProjectNode" />
               <item name="testOne" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testOne" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testOne" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -303,12 +328,18 @@
       <workItem from="1559612907154" duration="680000" />
       <workItem from="1559696259497" duration="1495000" />
       <workItem from="1559700505112" duration="3811000" />
-      <workItem from="1559789429674" duration="4917000" />
+      <workItem from="1559789429674" duration="5097000" />
+      <workItem from="1560135164879" duration="13000" />
+      <workItem from="1560149580043" duration="60000" />
+      <workItem from="1560239127450" duration="639000" />
+      <workItem from="1560480935129" duration="1688000" />
+      <workItem from="1560760430861" duration="927000" />
+      <workItem from="1560761390160" duration="273000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60835000" />
+    <option name="totallyTimeSpent" value="64615000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -320,10 +351,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="28" width="1295" height="808" extended-state="0" />
-    <editor active="true" />
+    <frame x="145" y="37" width="1295" height="808" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21428572" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21428572" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -337,7 +367,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32960895" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32960895" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -413,9 +443,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="930">
           <caret line="64" column="37" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -433,13 +460,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/unit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -479,22 +499,31 @@
     <entry file="file://$PROJECT_DIR$/src/assets/login-bg.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/QuestionList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="158" column="35" lean-forward="true" selection-start-line="158" selection-start-column="35" selection-end-line="158" selection-end-column="35" />
+        <state relative-caret-position="143">
+          <caret line="319" column="21" selection-start-line="319" selection-start-column="21" selection-end-line="319" selection-end-column="21" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="e#3578#7762#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/QuestionList.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/Question.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="75" column="72" lean-forward="true" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
+        <state relative-caret-position="5775">
+          <caret line="385" column="32" selection-start-line="385" selection-start-column="32" selection-end-line="385" selection-end-column="32" />
           <folding>
-            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" />
-            <element signature="e#3679#7391#0" />
-            <element signature="e#3701#4093#0" />
+            <element signature="e#4486#4532#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/unit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -505,17 +534,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Question.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="326" column="58" lean-forward="true" selection-start-line="326" selection-start-column="58" selection-end-line="326" selection-end-column="58" />
-          <folding>
-            <element signature="e#5731#9141#0" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="e#15450#16880#0" />
-          </folding>
+        <state relative-caret-position="2205">
+          <caret line="147" column="52" lean-forward="true" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="52" />
         </state>
       </provider>
     </entry>

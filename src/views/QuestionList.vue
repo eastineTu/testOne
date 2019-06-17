@@ -304,7 +304,7 @@
             background #F5F5F5
         .questionList-title
             height 24px
-            color #9E9E9E
+            color #333
             overflow-y scroll
             margin-bottom 8px
             background #F5F5F5
@@ -318,7 +318,7 @@
                 flex 1
                 text-align left
         .questionList
-            color #777
+            color #666
             overflow-y scroll
             background white
             font-size 10px
