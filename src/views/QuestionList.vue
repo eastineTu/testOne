@@ -38,8 +38,8 @@
 
             <div class="questionList" v-for="(item,index) in questionList" :key="index">
                 <div class="question-answer">
-                    <img class="selected" v-if="isChecked" src="../assets/radio-icon.png" @click="checkItem(item)"/>
-                    <img class="selected" v-if="!isChecked" src="../assets/radio-icon-unselect.png" @click="checkItem(item)"/>
+                    <img class="selected" v-if="isChecked" src="../assets/radio-icon.png" @click="dialogShow(item)"/>
+                    <img class="selected" v-if="!isChecked" src="../assets/radio-icon-unselect.png" @click="dialogShow(item)"/>
                     <div>
                         1:{{item.Q10[0]}},
                         2:{{item.Q10[1]}},
@@ -77,6 +77,25 @@
             <div>
                 加载更多
             </div>
+        </div>
+
+        <div class="show-dialog" v-if="isShowDialog">
+
+            <div class="show-dialog-info">
+                <div class="show-dialog-title">
+                    您确定变更了吗？
+                </div>
+
+                <div class="show-dialog-info-info" >
+                    <div class="show-dialog-dismiss" @click="dialogDismiss">
+                        取消
+                    </div>
+                    <div class="show-dialog-ok" @click="checkItem">
+                        确定
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="question-big-image" v-if="isShowBigImage" @click="closeImg">
@@ -189,7 +208,9 @@
                 isHasNextRight: true,
                 isHasNext: true,
                 page: 1,
-                pageSize: 10
+                pageSize: 10,
+                isShowDialog: false,
+                item: {}
             }
         },
         methods: {
@@ -218,16 +239,25 @@
                     }
                 });
             },
-            checkItem(item) {
+            dialogDismiss() {
+                this.isShowDialog = false
+            },
+            dialogShow(item) {
+                this.isShowDialog = true
+                this.item = item
+            },
+            checkItem() {
                 let thit = this
                 const query = this.$bmob.Query('question');
-                query.get(item.objectId).then(res => {
+                query.get(thit.item.objectId).then(res => {
                     res.set('checked', !thit.isChecked)
                     res.save()
                 })
+                this.isShowDialog = false
                 setTimeout(function () {
                     thit.getList()
                 }, 1000);
+
             },
             changeChecked(is) {
                 this.isChecked = is
@@ -365,6 +395,42 @@
             img
                 margin-top 100px
                 width 300px
+        .show-dialog
+            width 100%
+            height 100%
+            background rgba(0, 0, 0, 0.7)
+            position absolute
+            top 0
+            left 0
+            display flex
+            justify-content center
+            .show-dialog-info
+                margin-top 10%
+                width 300px
+                height 100px
+                background white
+                border-radius 8px
+                text-align center
+                .show-dialog-title
+                    height 70px
+                    line-height 70px
+                    font-size 16px
+                    border-bottom 1PX solid #DDD
+                .show-dialog-info-info
+                    height 30px
+                    display flex
+                    line-height 30px
+                    justify-content center
+                    .show-dialog-dismiss
+                        font-size 14px
+                        flex 1
+                        border-right 1PX solid #DDD
+                        color #999
+                    .show-dialog-ok
+                        font-size 14px
+                        flex 1
+                        color #108EE9
+
         .loading-more
             width 100%
             height 28px

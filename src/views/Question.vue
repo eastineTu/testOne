@@ -58,9 +58,14 @@
                 <div class="answer-message">
                     C：{{questions[questionIndex].selectC}} D：{{questions[questionIndex].selectD}}
                 </div>
+                <div class="answer-message" v-if="questions[questionIndex].selectE">
+                    E：{{questions[questionIndex].selectE}}
+                </div>
+
                 <div class="answer-info-value">
                     <div class="title">答案：</div>
-                    <div class="answer-info-info">{{questions[questionIndex].answer}}</div>
+                    <div class="answer-info-info" v-html="questions[questionIndex].answer2">
+                    </div>
                 </div>
                 <div class="answer-info-value">
                     <div class="title">解析：</div>
@@ -97,6 +102,7 @@
                 img1: '',
                 img2: '',
                 img3: '',
+                answerStr: '',
                 imgNext: true,
                 takePhotoInfos: [{
                     info: '(图片题）是否有独立的体验区（10分)',
@@ -118,6 +124,7 @@
                         selectC: '人工防腐剂',
                         selectD: '氨基酸',
                         answer: 'D',
+                        answer2: 'D 氨基酸',
                         selectAnswer: '',
                         info: '氨基酸类洁面温和不刺激，适合敏感肌肤使用 。'
                     },
@@ -128,6 +135,7 @@
                         selectC: '真皮层',
                         selectD: '皮下组织',
                         answer: 'A',
+                        answer2: 'A 角质层',
                         selectAnswer: '',
                         info: '皮肤分为三大层：表皮层、真皮层、皮下组织，而表皮层又分为5小层：角质层、透明层、颗粒层、有棘层、基底层。'
                     },
@@ -138,6 +146,7 @@
                         selectC: '专业的彩妆技巧',
                         selectD: '熟练标准的接待流程',
                         answer: 'C',
+                        answer2: 'C 专业的彩妆技巧',
                         selectAnswer: '',
                         info: '生物科技护肤品销售人员的职业准则包含：专业皮肤知识，整洁的仪容仪表，' +
                             '熟练的接待流程和专业的护肤手法及服务，熟知生物科技护肤品的理念和产品。'
@@ -148,6 +157,7 @@
                         selectB: '特干',
                         selectC: '混合',
                         selectD: '痤疮',
+                        answer2: 'C 混合',
                         answer: 'C',
                         selectAnswer: '',
                         info: '混合肌属于肌肤类型，不属于肌肤问题。'
@@ -159,6 +169,7 @@
                         selectC: '水杨酸',
                         selectD: '甘油',
                         answer: 'ABD',
+                        answer2: 'A 透明质酸' + '<br/>' + 'B 烟酰胺' + '<br/>' + 'D 甘油',
                         selectAnswer: '',
                         info: '对于有特干肌问题的人群来说，应选用含有增湿剂、润肤剂等成分的护肤品，而水杨酸刺激性过强，' +
                             '主要用于消炎祛痘，不适合特干肌人群使用。'
@@ -171,6 +182,7 @@
                         selectD: '肌肤问题',
                         selectE: '所购产品',
                         answer: 'ABCDE',
+                        answer2: 'A 顾客信息' + '<br/>' + 'B 肌肤检测结果' + '<br/>' + 'C 问询结果' + '<br/>' + 'D 肌肤问题' + '<br/>' + 'E 所购产品',
                         selectAnswer: '',
                         info: '顾客档案不仅要包含联系信息，还要包含标准接待流程中产生的其他信息，如肌肤检测结果、问询结果、肌肤问题、所购产品等。'
                     },
@@ -181,6 +193,7 @@
                         selectC: '高纯水',
                         selectD: '饮用水',
                         answer: 'ABCD',
+                        answer2: 'A 温泉水' + '<br/>' + 'B 矿泉水' + '<br/>' + 'C 高纯水' + '<br/>' + 'D 饮用水',
                         selectAnswer: '',
                         info: '《化妆品生产企业规范》2007规定生产用水的水质应达到国家生活饮用水卫生标准（GB5749-2006）的要求。'
                     }
@@ -255,12 +268,42 @@
                 }
                 console.log('选择：' + this.questions[this.questionIndex].selectAnswer)
             },
+            doSetLocal() {
+                localStorage.setItem("isQuestion", this.isQuestion)
+                localStorage.setItem("isAnswer", this.isAnswer)
+                localStorage.setItem("isTakePhoto", this.isTakePhoto)
+                localStorage.setItem("questionIndex", this.questionIndex)
+                localStorage.setItem("valueNum", this.valueNum)
+                localStorage.setItem("countNum", this.countNum)
+
+                let Qs = []
+                this.questions.forEach((item) => {
+                    if (item.selectAnswer) {
+                        Qs.push(item.selectAnswer)
+                    }
+                })
+                this.takePhotoInfos.forEach((item) => {
+                    if (item.selectAnswer) {
+                        Qs.push(item.selectAnswer)
+                    }
+                })
+                if (Qs.length > 0) {
+                    this.answer = Qs.toString()
+                    localStorage.setItem('answerStr', this.answerStr)
+                }
+
+
+                localStorage.setItem("img1", this.img1)
+                localStorage.setItem("img2", this.img2)
+                localStorage.setItem("img3", this.img3)
+            },
             doCheck() {
                 this.getRadioValue()
                 this.getCountNum()
                 if (this.questions[this.questionIndex].selectAnswer) {
                     this.isQuestion = false
                     this.isAnswer = true
+                    this.doSetLocal()
                 } else {
                     this.showToast('您还没有进行选择', 1000)
                 }
@@ -276,6 +319,7 @@
                     this.isAnswer = false
                     this.isTakePhoto = true
                 }
+                this.doSetLocal()
             },
             doSetImageList(data) {
                 if (this.questionIndex === 7) {
@@ -299,7 +343,7 @@
                 for (let i = 0; i < obj.length; i++) {
                     if (obj[i].checked) {
                         if (obj[i].value === 'A') {
-                            if(!img) {
+                            if (!img) {
                                 this.imgNext = false
                                 this.showToast('您还没有上传图片！', 1000)
                                 break
@@ -346,6 +390,7 @@
                         this.valueNum += 10
                     }
                 }
+                this.doSetLocal()
             },
             doFinish() {
                 this.$bmob.initialize('5341f8e254942033b3dae717daa7eed5', '4e0664824ca488cccad8fe1508a2baa0');
@@ -364,12 +409,16 @@
                 query.set("user", isPublisher)
                 const point = this.$bmob.GeoPoint({latitude: this.latitude, longitude: this.longitude})
                 query.set("location", point)
-                let Q10 = []
+                let Q10 = this.answer.split(',')
                 this.questions.forEach((item) => {
-                    Q10.push(item.selectAnswer)
+                    if (item.selectAnswer) {
+                        Q10.push(item.selectAnswer)
+                    }
                 })
                 this.takePhotoInfos.forEach((item) => {
-                    Q10.push(item.selectAnswer)
+                    if (item.selectAnswer) {
+                        Q10.push(item.selectAnswer)
+                    }
                 })
                 query.set("Q10", Q10)
                 query.set("count", this.countNum)
@@ -393,6 +442,24 @@
             this.longitude = parseFloat(localStorage.getItem("longitude"))
             this.latitude = parseFloat(localStorage.getItem("latitude"))
             console.log('qqq>>>>>' + this.userId)
+
+            this.questionIndex = parseInt(localStorage.getItem("questionIndex"))
+            this.valueNum = parseInt(localStorage.getItem("valueNum"))
+            if (!this.questionIndex) {
+                this.questionIndex = 0
+                this.valueNum = 10
+            } else {
+                this.isQuestion = (localStorage.getItem("isQuestion") === 'true')
+                this.isAnswer = (localStorage.getItem("isAnswer") === 'true')
+                this.isTakePhoto = (localStorage.getItem("isTakePhoto") === 'true')
+                this.answerStr = localStorage.getItem("answerStr")
+                this.countNum = parseInt(localStorage.getItem("countNum"))
+                this.img1 = localStorage.getItem("img1")
+                this.img2 = localStorage.getItem("img2")
+                this.img3 = localStorage.getItem("img3")
+            }
+            console.log(this.questionIndex)
+
         }
     }
 </script>

@@ -29,6 +29,7 @@
         methods: {
             goQuestion() {
                 // this.$router.push({name: 'question'});
+                localStorage.setItem("questionIndex", 0)
                 this.$router.replace({name: 'question'});
             }
         },
