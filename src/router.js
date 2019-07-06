@@ -9,6 +9,7 @@ const Empty = r => require.ensure([], () => r(require('./views/Empty.vue')), 'Em
 const Rule = r => require.ensure([], () => r(require('./views/Rule.vue')), 'Rule')
 const Finish = r => require.ensure([], () => r(require('./views/Finish.vue')), 'Finish')
 const QuestionList = r => require.ensure([], () => r(require('./views/QuestionList.vue')), 'QuestionList')
+const BaiduLocation = r => require.ensure([], () => r(require('./views/BaiduLocation.vue')), 'BaiduLocation')
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ const route = new Router({
             name: 'questionList',
             meta: { title: '【挑战新“肌愈”】' },
             component: QuestionList
+        },{
+            path: '/baiduLocation',
+            name: 'baiduLocation',
+            meta: { title: '【挑战新“肌愈”】' },
+            component: BaiduLocation
         }
     ]
 })

@@ -37,7 +37,7 @@
                 <img class="progress" :src="imgList[questionIndex].imgSrc"/>
                 <div class="question-message">{{takePhotoInfos[questionIndex - 7].info}}</div>
                 <div class="select-input">
-                    <label><input name="Fruit" type="radio" value="A" checked/> A：是→上传照片 </label><br>
+                    <label>s A：是→上传照片 </label><br>
                     <label><input name="Fruit" type="radio" value="B"/> B：否 </label>
                 </div>
                 <div class="select-photo">

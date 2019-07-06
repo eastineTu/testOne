@@ -1,5 +1,7 @@
 <template>
     <div class="all-questionList">
+        <div id="allmap"></div>
+
         <div v-if="false" class="question-info" v-for="(item,index) in questions" :key="index">
             <div> {{item.questionInfo}}</div>
             <div style="display: flex">
@@ -38,7 +40,7 @@
 
             <div class="questionList" v-for="(item,index) in questionList" :key="index">
                 <div class="question-answer">
-                    <img class="selected" v-if="isChecked" src="../assets/radio-icon.png" @click="dialogShow(item)"/>
+                    <img class="selected" v-if="isChecked" src="../assets/radio-icon.png"/>
                     <img class="selected" v-if="!isChecked" src="../assets/radio-icon-unselect.png" @click="dialogShow(item)"/>
                     <div>
                         1:{{item.Q10[0]}},
@@ -54,13 +56,22 @@
                     </div>
                 </div>
                 <div> {{item.user.username}}</div>
-                <div class="question-location"> {{item.location.latitude}}<br>{{item.location.longitude}}</div>
+                <div class="question-location"> <a :href=gotoLocation(item)>{{item.location.latitude}}<br>{{item.location.longitude}}</a></div>
                 <div> {{item.count}}</div>
                 <div> {{item.createdAt}}</div>
                 <div>
-                    <img :src="item.image1.url" v-if="item.image1" @click="clickedImg(item.image1.url)"/>
-                    <img :src="item.image2.url" v-if="item.image2" @click="clickedImg(item.image2.url)"/>
-                    <img :src="item.image3.url" v-if="item.image3" @click="clickedImg(item.image3.url)"/>
+                    <div class="select_img">
+                        <img  class="select_img_img" :src="item.image1.url" v-if="item.image1" @click="clickedImg(item.image1.url)"/>
+                        <input v-if="item.image1" :name="item.user.username" type="checkbox" />
+                    </div>
+                    <div class="select_img">
+                        <img  class="select_img_img" :src="item.image2.url" v-if="item.image2" @click="clickedImg(item.image2.url)"/>
+                        <input v-if="item.image2" :name="item.user.username" type="checkbox" />
+                    </div>
+                    <div class="select_img">
+                        <img class="select_img_img" :src="item.image3.url" v-if="item.image3" @click="clickedImg(item.image3.url)"/>
+                        <input v-if="item.image3" :name="item.user.username" type="checkbox" />
+                    </div>
                 </div>
                 <div class="question-check" v-if="!isChecked">
                     待确认
@@ -246,10 +257,20 @@
                 this.isShowDialog = true
                 this.item = item
             },
+            selectImage(item) {
+                let obj = document.getElementsByName(item)
+                for (let i = 0; i < obj.length; i++) {
+                    if (obj[i].checked) {
+                        item.count += 10
+                    }
+                }
+            },
             checkItem() {
                 let thit = this
+                thit.selectImage(thit.item)
                 const query = this.$bmob.Query('question');
                 query.get(thit.item.objectId).then(res => {
+                    res.set('count', thit.count)
                     res.set('checked', !thit.isChecked)
                     res.save()
                 })
@@ -299,6 +320,15 @@
                 }
 
                 this.getList()
+            },
+            checkImg(item) {
+                item.state = !item.state;
+                console.log(this.items);
+            },
+            gotoLocation(item) {
+                let str = ''
+                str = 'baidu.html?lat=' + item.location.latitude + '&lng=' + item.location.longitude
+                return str
             }
         },
         created() {
@@ -363,6 +393,15 @@
                     width 22px
                     height 22px
                     margin-right 10px
+                .select_img
+                    display flex
+                    flex-direction column
+                    .select_img_img
+                        width 22px
+                        height 22px
+                    input
+                        width 100%
+                        text-align center
             .question-check
                 flex 1
                 border-radius 20px
