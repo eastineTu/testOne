@@ -59,7 +59,7 @@
                 <div class="question-location"> <a :href=gotoLocation(item)>{{item.location.latitude}}<br>{{item.location.longitude}}</a></div>
                 <div> {{item.count}}</div>
                 <div> {{item.createdAt}}</div>
-                <div>
+                <div class="all-img">
                     <div class="select_img">
                         <img  class="select_img_img" :src="item.image1.url" v-if="item.image1" @click="clickedImg(item.image1.url)"/>
                         <input v-if="item.image1" :name="item.user.username" type="checkbox" />
@@ -393,6 +393,12 @@
                     width 22px
                     height 22px
                     margin-right 10px
+            .all-img
+                display flex
+                flex 1
+                height 34px
+                line-height 34px
+                text-align left
                 .select_img
                     display flex
                     flex-direction column
