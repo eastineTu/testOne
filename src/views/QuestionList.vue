@@ -56,21 +56,21 @@
                     </div>
                 </div>
                 <div> {{item.user.username}}</div>
-                <div class="question-location"> <a :href=gotoLocation(item)>{{item.location.latitude}}<br>{{item.location.longitude}}</a></div>
+                <div class="question-location"> <a :href=gotoLocation(item) target="_Blank">{{item.location.latitude}}<br>{{item.location.longitude}}</a></div>
                 <div> {{item.count}}</div>
                 <div> {{item.createdAt}}</div>
                 <div class="all-img">
                     <div class="select_img">
                         <img  class="select_img_img" :src="item.image1.url" v-if="item.image1" @click="clickedImg(item.image1.url)"/>
-                        <input v-if="item.image1" :name="item.user.username" type="checkbox" />
+                        <input v-if="item.image1 && !isChecked" :name="item.user.username" type="checkbox" />
                     </div>
                     <div class="select_img">
                         <img  class="select_img_img" :src="item.image2.url" v-if="item.image2" @click="clickedImg(item.image2.url)"/>
-                        <input v-if="item.image2" :name="item.user.username" type="checkbox" />
+                        <input v-if="item.image2 && !isChecked" :name="item.user.username" type="checkbox" />
                     </div>
                     <div class="select_img">
                         <img class="select_img_img" :src="item.image3.url" v-if="item.image3" @click="clickedImg(item.image3.url)"/>
-                        <input v-if="item.image3" :name="item.user.username" type="checkbox" />
+                        <input v-if="item.image3 && !isChecked" :name="item.user.username" type="checkbox" />
                     </div>
                 </div>
                 <div class="question-check" v-if="!isChecked">
@@ -235,6 +235,7 @@
                 } else {
                     query.skip(this.skipNumLeft)
                 }
+                query.order("-count")
                 query.find().then(res => {
                     this.questionList = res
 
@@ -257,20 +258,20 @@
                 this.isShowDialog = true
                 this.item = item
             },
-            selectImage(item) {
-                let obj = document.getElementsByName(item)
+            selectImage() {
+                let obj = document.getElementsByName(this.item.user.username)
                 for (let i = 0; i < obj.length; i++) {
                     if (obj[i].checked) {
-                        item.count += 10
+                        this.item.count += 10
                     }
                 }
             },
             checkItem() {
                 let thit = this
-                thit.selectImage(thit.item)
+                thit.selectImage()
                 const query = this.$bmob.Query('question');
                 query.get(thit.item.objectId).then(res => {
-                    res.set('count', thit.count)
+                    res.set('count', thit.item.count)
                     res.set('checked', !thit.isChecked)
                     res.save()
                 })
@@ -320,10 +321,6 @@
                 }
 
                 this.getList()
-            },
-            checkImg(item) {
-                item.state = !item.state;
-                console.log(this.items);
             },
             gotoLocation(item) {
                 let str = ''
